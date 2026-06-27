@@ -1,0 +1,5 @@
+[DEFAULT]
+env=dev
+
+[spacy]
+dictionary=en_core_web_sm

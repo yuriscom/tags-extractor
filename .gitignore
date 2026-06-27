@@ -1,0 +1,12 @@
+__pycache__
+spacyenv/bin
+spacyenv
+venv
+.venv
+spacytest.iml
+*.iml
+models/*
+!models/info.txt
+layer/spacy/*
+!layer/spacy/Dockerfile
+*.zip
