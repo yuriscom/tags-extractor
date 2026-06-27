@@ -191,8 +191,8 @@ class TagsExtractor():
                             if entity.label_ in fullTermWeightBonusCoefficient else 1
 
                         fullTerm = FullTerm(txt, additionalBonusMultiplier);
-                        mapFullTerm.setdefault(token.text, set());
-                        mapFullTerm[token.text].add(fullTerm);
+                        mapFullTerm.setdefault(token.lemma_, set());
+                        mapFullTerm[token.lemma_].add(fullTerm);
 
             if multipleOccuranceMultiplier:
                 weight = weight * occurance[txt]
@@ -265,8 +265,11 @@ class FullTerm:
         self.txt = txt
         self.weight = weight
 
-    def __str__(self):
-        return self.txt + ":" + self.weight;
+    def __eq__(self, other):
+        return isinstance(other, FullTerm) and self.txt == other.txt
+
+    def __hash__(self):
+        return hash(self.txt)
 
     def __str__(self):
-        return self.txt + ":" + self.weight;
+        return f"{self.txt}:{self.weight}"
