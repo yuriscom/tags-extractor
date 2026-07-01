@@ -163,8 +163,11 @@ class TagsExtractor():
 
     def get_tags(self, doc, node_weight, number=20):
         entity_weights, full_term_map = self._build_entity_weights(doc)
-        tags = self._merge_terms(node_weight, entity_weights, full_term_map, number)
-        self.tags = OrderedDict(sorted(tags.items(), key=lambda t: t[1], reverse=True))
+        tags = self._merge_terms(node_weight, entity_weights, full_term_map)
+        # `number` is an output cap: return at most the top-N tags (often fewer, since
+        # many terms don't emit a tag). All terms are scored first so the ranking is stable.
+        ranked = sorted(tags.items(), key=lambda t: t[1], reverse=True)[:number]
+        self.tags = OrderedDict(ranked)
         return self.tags
 
     def _build_entity_weights(self, doc):
@@ -231,7 +234,7 @@ class TagsExtractor():
                 ambiguity_winner = ranked[0][0]
         return is_ambiguity, ambiguity_winner
 
-    def _merge_terms(self, node_weight, entity_weights, full_term_map, number):
+    def _merge_terms(self, node_weight, entity_weights, full_term_map):
         """Combine TextRank scores with entity weights, promoting single tokens to
         their multi-word entity phrase where that scores higher.
 
@@ -239,11 +242,14 @@ class TagsExtractor():
         score. This is tracked with a per-phrase growth factor (starts at 1.0) that
         multiplies up as tokens contribute, so the phrase weight (from entity_weights)
         and the rank-based growth stay as separate factors.
+
+        All terms are scored (no early cutoff) so every contribution lands and the final
+        ranking is stable; the caller caps the number of tags returned.
         """
         tags = dict()
         phrase_growth = dict()
         node_weight = OrderedDict(sorted(node_weight.items(), key=lambda t: t[1], reverse=True))
-        for i, (term, rank_score) in enumerate(node_weight.items()):
+        for term, rank_score in node_weight.items():
             # we are only interested in replacing the ones that have multi worded version
             if term in full_term_map:
                 is_ambiguity, ambiguity_winner = self._resolve_ambiguity(full_term_map[term], entity_weights)
@@ -284,9 +290,6 @@ class TagsExtractor():
                 weight = entity_weights[term]
                 if weight > 0:
                     tags[term] = rank_score * weight
-
-            if i > number:
-                break
 
         return tags
 

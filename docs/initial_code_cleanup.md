@@ -115,12 +115,17 @@ The winner-selection was opaque (`most_common()` called three times inline).
   token is kept. The only remaining edge case — a multi-way tie at the top resolving by `Counter`
   insertion order — is deterministic and considered acceptable, so no behavioral change was made.
 
-### #5 — Top-N cutoff is unreliable
-`if i > number: break` counts position in the sorted `node_weight`, not the number of terms actually
-emitted, and is off-by-one (`> number` yields `number + 1`). Because nodes get skipped/merged, the
-returned count is unpredictable.
-- **Direction (TBD):** cut off on the count of emitted terms after final sorting, not on the input
-  index.
+### #5 — Top-N cutoff is unreliable — RESOLVED
+`if i > number: break` cut off on the sorted `node_weight` *input index*, which (a) is off-by-one,
+(b) counts terms not emitted tags, and (c) dropped lower-ranked terms whose contributions still feed
+the growth of top phrases — so it actually changed the top-N ordering, not just the count.
+- **Resolution:** `_merge_terms` now scores **all** terms (no early cutoff), and `get_tags` treats
+  `number` as an **output cap**: sort all tags and return the top `number`. Measurements showed the
+  merge loop is sub-millisecond even for the largest fixture (the real cost is spaCy parsing, which
+  was never bounded by `number` anyway), so processing everything is essentially free and yields a
+  stable, complete ranking. `number` now means "at most N tags" (you may still get fewer, since many
+  terms don't emit a tag). This changes output (more complete, re-ordered top-N), so the golden files
+  were regenerated to the new baseline.
 
 > Note: #4 becomes much easier to address after Phase 3 isolates the ambiguity logic into its own
 > method, and #2/#3 become clearer once `_merge_terms` is a self-contained function. So the cleanup
