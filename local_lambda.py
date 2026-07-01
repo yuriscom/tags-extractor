@@ -9,7 +9,7 @@ os.environ["MODEL"] = "en_core_web_md"
 # and set MODEL to the versioned name, e.g. "en_core_web_md-3.7.1".
 os.environ["SOURCE_LINK"] = "https://github.com/explosion/spacy-models/releases/download"
 
-import lmbda
+import lambda_index
 
 
 def main():
@@ -17,7 +17,7 @@ def main():
     text = f.read()
     f.close()
 
-    # response = lmbda.lambda_handler({
+    # response = lambda_index.lambda_handler({
     #     "body": {
     #         "data": text,
     #         "labels": ["PERSON", "ORG", "NORP", "GPE", "EVENT", "PRODUCT", "WORK_OF_ART"],
@@ -25,7 +25,7 @@ def main():
     #     }
     # }, {})
 
-    response = lmbda.lambda_handler({
+    response = lambda_index.lambda_handler({
         "body": {
             "data": text,
             # "labels": ["PERSON", "ORG", "NORP", "FAC", "EVENT", "PRODUCT", "WORK_OF_ART"],

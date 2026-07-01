@@ -1,6 +1,6 @@
 """Shared extraction harness for the characterization tests.
 
-This mirrors the live Lambda flow (see ``lmbda.lambda_handler``): sanitize the raw
+This mirrors the live Lambda flow (see ``lambda_index.lambda_handler``): sanitize the raw
 text, strip HTML, then run ``TagsExtractor.extract`` with the default label weights.
 It is the single source of truth for both golden generation and the test, so the two
 can never drift apart.

@@ -1,26 +1,27 @@
 import json
 import re
-from collections import OrderedDict, Counter, UserDict, UserList
+from collections import OrderedDict, Counter
 
 import numpy as np
 from spacy.lang.en.stop_words import STOP_WORDS
 
-excludePos = ["PUNCT", "PART"];
-mwEntityLabelWeight = {"PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5, "WORK_OF_ART": 5,
-                       "DATE": 0}
-multipleOccuranceMultiplier = True
-fullTermWeightBonusCoefficient = {"PERSON": 2}
+EXCLUDE_POS = ["PUNCT", "PART"]
+DEFAULT_ENTITY_LABEL_WEIGHTS = {
+    "PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5,
+    "WORK_OF_ART": 5, "DATE": 0,
+}
+MULTIPLE_OCCURRENCE_MULTIPLIER = True
+FULL_TERM_WEIGHT_BONUS = {"PERSON": 2}
 
 
 class TextRank4Keyword():
     def __init__(self, nlp):
-        self.nlp = nlp;
+        self.nlp = nlp
         self.d = 0.85  # damping coefficient, usually is .85
         self.min_diff = 1e-5  # convergence threshold
         self.steps = 10  # iteration steps
         self.node_weight = None  # save keywords and its weight
-        self.doc = None;
-        self.keywords = None;
+        self.doc = None
 
     def set_stopwords(self, stopwords):
         for word in STOP_WORDS.union(set(stopwords)):
@@ -32,7 +33,7 @@ class TextRank4Keyword():
         for sent in doc.sents:
             selected_words = []
             for token in sent:
-                # Store words only with cadidate POS tag
+                # Store words only with candidate POS tag
                 is_candidate_pos = token.pos_ in candidate_pos and token.is_stop is False and token.is_alpha is True
                 is_candidate_label = len(labels) == 0 or (len(labels) > 0 and token.ent_type_ in labels)
                 if is_candidate_pos and is_candidate_label:
@@ -79,7 +80,7 @@ class TextRank4Keyword():
             i, j = vocab[word1], vocab[word2]
             g[i][j] = 1
 
-        # Get Symmeric matrix
+        # Get symmetric matrix
         g = self.symmetrize(g)
 
         # Normalize matrix by column
@@ -96,7 +97,7 @@ class TextRank4Keyword():
         # Set stop words
         self.set_stopwords(stopwords)
 
-        # Pare text by spacy
+        # Parse text with spaCy
         doc = self.nlp(text)
 
         self.doc = doc
@@ -113,7 +114,7 @@ class TextRank4Keyword():
         # Get normalized matrix
         g = self.get_matrix(vocab, token_pairs)
 
-        # Initialization for weight(pagerank value)
+        # Initialization for weight (pagerank value)
         pr = np.ones(len(vocab), dtype='float')
 
         # Iteration
@@ -135,126 +136,123 @@ class TextRank4Keyword():
 
 class TagsExtractor():
     def __init__(self, nlp):
-        self.nlp = nlp;
-        self.removeAmbiguity = True;
+        self.nlp = nlp
+        self.remove_ambiguity = True
         self.tags = OrderedDict()
-        self.mwEntityLabelWeight = mwEntityLabelWeight.copy();
+        self.entity_label_weights = DEFAULT_ENTITY_LABEL_WEIGHTS.copy()
 
     # labels: https://spacy.io/api/annotation#dependency-parsing
     def extract(self, text, labels, num=20):
         if isinstance(labels, dict):
-            self.mwEntityLabelWeight.update(labels);
-            labels = list(labels.keys());
+            self.entity_label_weights.update(labels)
+            labels = list(labels.keys())
 
-        tr4w = TextRank4Keyword(self.nlp);
+        tr4w = TextRank4Keyword(self.nlp)
         tr4w.analyze(text, labels, candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
         return self.get_tags(tr4w.doc, tr4w.node_weight, num)
 
     def normalize_entity(self, ent):
-        return re.sub('^the\s+', "", ent, flags=re.IGNORECASE)
+        return re.sub(r'^the\s+', "", ent, flags=re.IGNORECASE)
 
     def get_tags(self, doc, node_weight, number=20):
-        cnt = Counter();
-        occurance = Counter();
-        mapFullTerm = UserDict()
+        entity_weights = Counter()
+        occurrence = Counter()
+        full_term_map = dict()
 
         for entity in doc.ents:
-            # weight = swEntityLabelWeight[entity.label_] if entity.label_ in swEntityLabelWeight else 1
             weight = 1
-            txt = self.normalize_entity(entity.text)
-            curDoc = self.nlp(txt)
-            wordsAr = UserList()
-            tokens = [token.text for token in curDoc];
+            text = self.normalize_entity(entity.text)
+            entity_doc = self.nlp(text)
+            words = []
+            token_count = len(entity_doc)
 
-            for token in curDoc:
-                if token.pos_ not in excludePos:
-                    wordsAr.append(token.text)
+            for token in entity_doc:
+                if token.pos_ not in EXCLUDE_POS:
+                    words.append(token.text)
 
-            txt = " ".join(wordsAr)
-            occurance[txt] += 1;
+            text = " ".join(words)
+            occurrence[text] += 1
 
-            if len(tokens) > 1:
-                weight = self.mwEntityLabelWeight[entity.label_] if entity.label_ in self.mwEntityLabelWeight else 1
-                for token in curDoc:
+            if token_count > 1:
+                weight = self.entity_label_weights[entity.label_] if entity.label_ in self.entity_label_weights else 1
+                for token in entity_doc:
                     if token.is_stop is False:
-                        additionalBonusMultiplier = fullTermWeightBonusCoefficient[entity.label_] \
-                            if entity.label_ in fullTermWeightBonusCoefficient else 1
+                        bonus_multiplier = FULL_TERM_WEIGHT_BONUS[entity.label_] \
+                            if entity.label_ in FULL_TERM_WEIGHT_BONUS else 1
 
-                        fullTerm = FullTerm(txt, additionalBonusMultiplier);
-                        mapFullTerm.setdefault(token.lemma_, set());
-                        mapFullTerm[token.lemma_].add(fullTerm);
+                        full_term = FullTerm(text, bonus_multiplier)
+                        full_term_map.setdefault(token.lemma_, set())
+                        full_term_map[token.lemma_].add(full_term)
 
-            if multipleOccuranceMultiplier:
-                weight = weight * occurance[txt]
+            if MULTIPLE_OCCURRENCE_MULTIPLIER:
+                weight = weight * occurrence[text]
 
-            cnt[txt] += weight
+            entity_weights[text] += weight
 
         tags = dict()
         node_weight = OrderedDict(sorted(node_weight.items(), key=lambda t: t[1], reverse=True))
-        for i, (key, value) in enumerate(node_weight.items()):
+        for i, (term, rank_score) in enumerate(node_weight.items()):
             # we are only interested in replacing the ones that have multi worded version
-            if key in mapFullTerm:
-                isAmbiguity = False
-                ambiguityWinner = None;
-                if len(mapFullTerm[key]) > 1 and self.removeAmbiguity is True:
-                    isAmbiguity = True
-                    pCnt = Counter()
+            if term in full_term_map:
+                is_ambiguity = False
+                ambiguity_winner = None
+                if len(full_term_map[term]) > 1 and self.remove_ambiguity is True:
+                    is_ambiguity = True
+                    phrase_counts = Counter()
 
-                    for fullTerm in mapFullTerm[key]:
-                        txt = fullTerm.txt
-                        pCnt[txt] += cnt[txt] or 1;
-                    if pCnt.most_common()[0][1] != pCnt.most_common()[len(pCnt) - 1][1]:
-                        ambiguityWinner = pCnt.most_common()[0][0]
+                    for full_term in full_term_map[term]:
+                        text = full_term.text
+                        phrase_counts[text] += entity_weights[text] or 1
+                    if phrase_counts.most_common()[0][1] != phrase_counts.most_common()[len(phrase_counts) - 1][1]:
+                        ambiguity_winner = phrase_counts.most_common()[0][0]
 
-                singleWeight = 0
-                if key in cnt:
-                    singleWeight = cnt[key]
+                single_weight = 0
+                if term in entity_weights:
+                    single_weight = entity_weights[term]
 
-                if self.removeAmbiguity is True and isAmbiguity and ambiguityWinner is None:
-                    tags[key] = tags.setdefault(key, 0) + value
+                if self.remove_ambiguity is True and is_ambiguity and ambiguity_winner is None:
+                    tags[term] = tags.setdefault(term, 0) + rank_score
                     continue
 
-                for fullTerm in mapFullTerm[key]:
-                    txt = fullTerm.txt
-                    weightBonus = fullTerm.weight
-                    if ambiguityWinner and ambiguityWinner != txt:
+                for full_term in full_term_map[term]:
+                    text = full_term.text
+                    weight_bonus = full_term.weight
+                    if ambiguity_winner and ambiguity_winner != text:
                         continue
 
-                    extraWeight = tags[txt] if txt in tags else 0
-                    multiWeight = (cnt[txt] + extraWeight) * weightBonus
+                    extra_weight = tags[text] if text in tags else 0
+                    multi_weight = (entity_weights[text] + extra_weight) * weight_bonus
 
-                    if singleWeight >= multiWeight:
-                        tags[key] = tags.setdefault(key, 0) + (value * singleWeight)
+                    if single_weight >= multi_weight:
+                        tags[term] = tags.setdefault(term, 0) + (rank_score * single_weight)
                     else:
-                        tags[txt] = tags.setdefault(txt, 0) + (value * multiWeight)
-
+                        tags[text] = tags.setdefault(text, 0) + (rank_score * multi_weight)
 
             else:
-                weight = cnt[key]
+                weight = entity_weights[term]
                 if weight > 0:
-                    tags[key] = value * weight
+                    tags[term] = rank_score * weight
 
             if i > number:
                 break
 
-        self.tags = OrderedDict(sorted(tags.items(), key=lambda t: t[1], reverse=True));
-        return self.tags;
+        self.tags = OrderedDict(sorted(tags.items(), key=lambda t: t[1], reverse=True))
+        return self.tags
 
     def to_json(self):
-        jsonObj = json.dumps(self.tags);
-        return jsonObj;
+        return json.dumps(self.tags)
 
 
 class FullTerm:
-    def __init__(self, txt, weight):
-        self.txt = txt
+    def __init__(self, text, weight):
+        self.text = text
         self.weight = weight
 
     def __eq__(self, other):
-        return isinstance(other, FullTerm) and self.txt == other.txt
+        return isinstance(other, FullTerm) and self.text == other.text
 
     def __hash__(self):
-        return hash(self.txt)
+        return hash(self.text)
 
     def __str__(self):
-        return f"{self.txt}:{self.weight}"
+        return f"{self.text}:{self.weight}"
