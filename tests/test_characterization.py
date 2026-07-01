@@ -30,5 +30,11 @@ def test_output_matches_golden(nlp, filename):
     result = h.extract_for_file(nlp, filename)
     expected = json.loads(golden.read_text(encoding="utf-8"))
 
-    # Compare ordered items: both the ranking order and the exact scores must match.
-    assert list(result.items()) == list(expected.items())
+    # The ranking order (the output contract) must match exactly...
+    assert list(result.keys()) == list(expected.keys())
+
+    # ...and each score must match within a small tolerance. Scores are floats built
+    # from many multiplications, so exact equality is too brittle; ranking + near-equal
+    # values is the meaningful contract.
+    for key in expected:
+        assert result[key] == pytest.approx(expected[key], rel=1e-9, abs=1e-9)

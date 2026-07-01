@@ -233,8 +233,15 @@ class TagsExtractor():
 
     def _merge_terms(self, node_weight, entity_weights, full_term_map, number):
         """Combine TextRank scores with entity weights, promoting single tokens to
-        their multi-word entity phrase where that scores higher."""
+        their multi-word entity phrase where that scores higher.
+
+        A multi-word phrase is amplified: each of its tokens compounds the phrase's
+        score. This is tracked with a per-phrase growth factor (starts at 1.0) that
+        multiplies up as tokens contribute, so the phrase weight (from entity_weights)
+        and the rank-based growth stay as separate factors.
+        """
         tags = dict()
+        phrase_growth = dict()
         node_weight = OrderedDict(sorted(node_weight.items(), key=lambda t: t[1], reverse=True))
         for i, (term, rank_score) in enumerate(node_weight.items()):
             # we are only interested in replacing the ones that have multi worded version
@@ -264,13 +271,14 @@ class TagsExtractor():
                     if ambiguity_winner and ambiguity_winner != text:
                         continue
 
-                    extra_weight = tags[text] if text in tags else 0
-                    multi_weight = (entity_weights[text] + extra_weight) * weight_bonus
+                    growth = phrase_growth.get(text, 1.0)
+                    multi_weight = entity_weights[text] * growth * weight_bonus
 
                     if single_weight >= multi_weight:
                         tags[term] = tags.setdefault(term, 0) + (rank_score * single_weight)
                     else:
                         tags[text] = tags.setdefault(text, 0) + (rank_score * multi_weight)
+                        phrase_growth[text] = growth * (1 + rank_score * weight_bonus)
 
             else:
                 weight = entity_weights[term]

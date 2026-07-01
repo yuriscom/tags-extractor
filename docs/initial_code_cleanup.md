@@ -91,12 +91,20 @@ than the full phrases.
   scores and the low-scored bare token is harmless. Behavior is unchanged; the branch now carries
   a comment explaining the intent.
 
-### #3 — Reads from `tags` while still building `tags`
-`extraWeight = tags[txt] if txt in tags else 0` then `multiWeight = (cnt[txt] + extraWeight) * weightBonus`
-reads an already-accumulated *score* and folds it back into a *count*-scale computation, making the
-result order-dependent and mixing units.
-- **Direction (TBD):** separate the accumulation pass from the read pass; don't feed output back
-  into intermediate weight math.
+### #3 — Reads from `tags` while still building `tags` — RESOLVED
+`multi_weight = (entity_weights[text] + tags[text]) * bonus` read the accumulated output score
+back in and added it to a raw weight (mixing units).
+- **Resolution:** the multi-word amplification is intentionally kept, but reformulated with a
+  per-phrase **growth factor** (`phrase_growth`, starts at 1.0). The recurrence
+  `weight + accumulated_score` is algebraically `weight × growth`, so now
+  `multi_weight = entity_weights[text] * growth * bonus` — a weight times a dimensionless growth
+  factor, with no score folded into a weight, and nothing read back from the `tags` output.
+  Growth advances as `growth *= (1 + rank_score * bonus)` on each phrase contribution.
+  This is numerically equivalent to the old formula (identical ranking; scores differ only by
+  floating-point noise ~1e-13), so the multi-word amplification behavior is preserved. The
+  characterization test now checks exact ranking order plus values within a small tolerance.
+  (Side note: the earlier claim that this was "order-dependent" was inaccurate — the closed form
+  `weight × (∏(1 + rank_i·bonus) − 1)` is symmetric, so token order doesn't change the result.)
 
 ### #4 — Ambiguity resolution is hard to follow — RESOLVED
 The winner-selection was opaque (`most_common()` called three times inline).
