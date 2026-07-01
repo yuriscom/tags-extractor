@@ -92,8 +92,8 @@ columns = to_enrichment_columns(result)   # dict of JSON-string columns, ready t
 
 **`to_enrichment_columns(result)`** returns these keys (each value is a JSON string except the last
 three): `keywords_json`, `entities_json`, `keyword_texts_json`, `entity_texts_json`,
-`entity_labels_json`, `entity_pairs_json`, `enrichment_version`, `enrichment_processed_at`,
-`enrichment_error`.
+`entity_labels_json`, `entity_pairs_json`, `entities_by_label_json` (a `{label: [normalized, ...]}`
+map), `enrichment_version`, `enrichment_processed_at`, `enrichment_error`.
 
 For debugging, **`to_enrichment_dict(result)`** returns the whole result as one nested dict, so
 `json.dumps(to_enrichment_dict(result), indent=2, ensure_ascii=False)` gives a readable, paste-ready

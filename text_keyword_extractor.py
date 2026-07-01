@@ -492,6 +492,16 @@ def entities_to_json(result):
     return json.dumps([asdict(entity) for entity in result.entities], ensure_ascii=False)
 
 
+def entities_by_label(result):
+    """Map each entity label to its normalized entity texts (score order, deduped)."""
+    grouped = OrderedDict()
+    for entity in result.entities:
+        names = grouped.setdefault(entity.label, [])
+        if entity.normalized not in names:
+            names.append(entity.normalized)
+    return grouped
+
+
 def to_enrichment_dict(result):
     """Full result as one nested, JSON-serializable dict — handy for debugging.
 
@@ -502,6 +512,7 @@ def to_enrichment_dict(result):
     return {
         "keywords": [asdict(keyword) for keyword in result.keywords],
         "entities": [asdict(entity) for entity in result.entities],
+        "entities_by_label": entities_by_label(result),
         "enrichment_version": result.enrichment_version,
         "enrichment_processed_at": result.enrichment_processed_at,
         "enrichment_error": result.enrichment_error,
@@ -526,6 +537,7 @@ def to_enrichment_columns(result):
         "entity_pairs_json": json.dumps(
             [f"{entity.label}:{entity.normalized}" for entity in result.entities],
             ensure_ascii=False),
+        "entities_by_label_json": json.dumps(entities_by_label(result), ensure_ascii=False),
         "enrichment_version": result.enrichment_version,
         "enrichment_processed_at": result.enrichment_processed_at,
         "enrichment_error": result.enrichment_error,

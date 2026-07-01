@@ -3,7 +3,7 @@ import json
 
 from htmlparser import MLStripper
 from spacy_wrapper import SpacyWrapper
-from text_keyword_extractor import TagsExtractor, to_enrichment_dict
+from text_keyword_extractor import TagsExtractor, to_enrichment_dict, to_enrichment_columns
 
 nlp = SpacyWrapper().init()
 
@@ -38,7 +38,7 @@ def lambda_handler(event, context):
         result = tex.to_json()
     else:
         data = tex.extract_features(stripped_text, labels, num)
-        result = json.dumps(to_enrichment_dict(data), ensure_ascii=False)
+        result = json.dumps(to_enrichment_columns(data), ensure_ascii=False)
 
     difftime = datetime.datetime.now() - starttime
     seconds = difftime.total_seconds()

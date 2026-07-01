@@ -113,6 +113,12 @@ def test_enrichment_columns_are_consistent(features, filename):
     assert json.loads(cols["entity_pairs_json"]) == [
         f"{e.label}:{e.normalized}" for e in result.entities]
 
+    # entities_by_label groups normalized names under each label (score order, deduped).
+    by_label = json.loads(cols["entities_by_label_json"])
+    assert set(by_label) == {e.label for e in result.entities}
+    for label, names in by_label.items():
+        assert names == list(dict.fromkeys(e.normalized for e in result.entities if e.label == label))
+
     # Metadata: versioned, timestamped, no error on the happy path.
     assert cols["enrichment_version"] == ENRICHMENT_VERSION
     assert cols["enrichment_error"] is None
