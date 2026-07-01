@@ -157,7 +157,7 @@ class TagsExtractor():
 
         tr4w = TextRank4Keyword(self.nlp);
         tr4w.analyze(text, labels, candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-        tr4w.get_keywords(20);
+        # tr4w.get_keywords(20);
         return self.get_tags(tr4w.doc, tr4w.node_weight, num)
 
     def normalize_entity(self, ent):
