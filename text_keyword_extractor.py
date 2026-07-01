@@ -1,27 +1,32 @@
 import json
 import re
-from collections import OrderedDict, Counter, UserDict, UserList
+from collections import OrderedDict, Counter
+from dataclasses import dataclass, field
 
 import numpy as np
 from spacy.lang.en.stop_words import STOP_WORDS
 
-excludePos = ["PUNCT", "PART"];
-mwEntityLabelWeight = {"PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5, "WORK_OF_ART": 5,
-                       "DATE": 0}
-multipleOccuranceMultiplier = True
-multiWinsMode = True
-fullTermWeightBonusCoefficient = {"PERSON": 2}
+
+@dataclass
+class ExtractorConfig:
+    """Tunable parameters for tag extraction, passed to TagsExtractor."""
+    exclude_pos: list = field(default_factory=lambda: ["PUNCT", "PART"])
+    entity_label_weights: dict = field(default_factory=lambda: {
+        "PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5,
+        "WORK_OF_ART": 5, "DATE": 0,
+    })
+    multiple_occurrence_multiplier: bool = True
+    full_term_weight_bonus: dict = field(default_factory=lambda: {"PERSON": 2})
 
 
 class TextRank4Keyword():
     def __init__(self, nlp):
-        self.nlp = nlp;
+        self.nlp = nlp
         self.d = 0.85  # damping coefficient, usually is .85
         self.min_diff = 1e-5  # convergence threshold
         self.steps = 10  # iteration steps
         self.node_weight = None  # save keywords and its weight
-        self.doc = None;
-        self.keywords = None;
+        self.doc = None
 
     def set_stopwords(self, stopwords):
         for word in STOP_WORDS.union(set(stopwords)):
@@ -33,7 +38,7 @@ class TextRank4Keyword():
         for sent in doc.sents:
             selected_words = []
             for token in sent:
-                # Store words only with cadidate POS tag
+                # Store words only with candidate POS tag
                 is_candidate_pos = token.pos_ in candidate_pos and token.is_stop is False and token.is_alpha is True
                 is_candidate_label = len(labels) == 0 or (len(labels) > 0 and token.ent_type_ in labels)
                 if is_candidate_pos and is_candidate_label:
@@ -80,7 +85,7 @@ class TextRank4Keyword():
             i, j = vocab[word1], vocab[word2]
             g[i][j] = 1
 
-        # Get Symmeric matrix
+        # Get symmetric matrix
         g = self.symmetrize(g)
 
         # Normalize matrix by column
@@ -88,14 +93,6 @@ class TextRank4Keyword():
         g_norm = np.divide(g, norm, out=np.zeros_like(g), where=norm != 0)
 
         return g_norm
-
-    def get_keywords(self, number=10):
-        """Print top number keywords"""
-        node_weight = OrderedDict(sorted(self.node_weight.items(), key=lambda t: t[1], reverse=True))
-        for i, (key, value) in enumerate(node_weight.items()):
-            # print(key + ' - ' + str(value))
-            if i > number:
-                break
 
     def analyze(self, text,
                 labels=[],
@@ -105,7 +102,7 @@ class TextRank4Keyword():
         # Set stop words
         self.set_stopwords(stopwords)
 
-        # Pare text by spacy
+        # Parse text with spaCy
         doc = self.nlp(text)
 
         self.doc = doc
@@ -122,7 +119,7 @@ class TextRank4Keyword():
         # Get normalized matrix
         g = self.get_matrix(vocab, token_pairs)
 
-        # Initialization for weight(pagerank value)
+        # Initialization for weight (pagerank value)
         pr = np.ones(len(vocab), dtype='float')
 
         # Iteration
@@ -143,133 +140,173 @@ class TextRank4Keyword():
 
 
 class TagsExtractor():
-    def __init__(self, nlp):
-        self.nlp = nlp;
-        self.removeAmbiguity = True;
+    def __init__(self, nlp, config=None):
+        self.nlp = nlp
+        self.config = config or ExtractorConfig()
+        self.remove_ambiguity = True
         self.tags = OrderedDict()
-        self.mwEntityLabelWeight = mwEntityLabelWeight.copy();
+        # Per-instance copy so extract() can merge request labels without mutating the config.
+        self.entity_label_weights = self.config.entity_label_weights.copy()
 
     # labels: https://spacy.io/api/annotation#dependency-parsing
     def extract(self, text, labels, num=20):
         if isinstance(labels, dict):
-            self.mwEntityLabelWeight.update(labels);
-            labels = list(labels.keys());
+            self.entity_label_weights.update(labels)
+            labels = list(labels.keys())
 
-        tr4w = TextRank4Keyword(self.nlp);
+        tr4w = TextRank4Keyword(self.nlp)
         tr4w.analyze(text, labels, candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-        tr4w.get_keywords(20);
         return self.get_tags(tr4w.doc, tr4w.node_weight, num)
 
     def normalize_entity(self, ent):
-        return re.sub('^the\s+', "", ent, flags=re.IGNORECASE)
+        return re.sub(r'^the\s+', "", ent, flags=re.IGNORECASE)
 
     def get_tags(self, doc, node_weight, number=20):
-        cnt = Counter();
-        occurance = Counter();
-        mapFullTerm = UserDict()
+        entity_weights, full_term_map = self._build_entity_weights(doc)
+        tags = self._merge_terms(node_weight, entity_weights, full_term_map)
+        # `number` is an output cap: return at most the top-N tags (often fewer, since
+        # many terms don't emit a tag). All terms are scored first so the ranking is stable.
+        ranked = sorted(tags.items(), key=lambda t: t[1], reverse=True)[:number]
+        self.tags = OrderedDict(ranked)
+        return self.tags
+
+    def _build_entity_weights(self, doc):
+        """Walk the spaCy entities and accumulate per-entity weights.
+
+        Returns:
+            entity_weights: Counter of normalized entity text -> accumulated weight.
+            full_term_map: dict of lemma -> set(FullTerm) for multi-word entities,
+                used later to promote single tokens to their full phrase.
+        """
+        entity_weights = Counter()
+        occurrence = Counter()
+        full_term_map = dict()
 
         for entity in doc.ents:
-            # weight = swEntityLabelWeight[entity.label_] if entity.label_ in swEntityLabelWeight else 1
             weight = 1
-            txt = self.normalize_entity(entity.text)
-            curDoc = self.nlp(txt)
-            wordsAr = UserList()
-            tokens = [token.text for token in curDoc];
+            text = self.normalize_entity(entity.text)
+            entity_doc = self.nlp(text)
+            words = []
+            token_count = len(entity_doc)
 
-            for token in curDoc:
-                if token.pos_ not in excludePos:
-                    wordsAr.append(token.text)
+            for token in entity_doc:
+                if token.pos_ not in self.config.exclude_pos:
+                    words.append(token.text)
 
-            txt = " ".join(wordsAr)
-            occurance[txt] += 1;
+            text = " ".join(words)
+            occurrence[text] += 1
 
-            if len(tokens) > 1:
-                weight = self.mwEntityLabelWeight[entity.label_] if entity.label_ in self.mwEntityLabelWeight else 1
-                for token in curDoc:
+            if token_count > 1:
+                weight = self.entity_label_weights[entity.label_] if entity.label_ in self.entity_label_weights else 1
+                for token in entity_doc:
                     if token.is_stop is False:
-                        additionalBonusMultiplier = fullTermWeightBonusCoefficient[entity.label_] \
-                            if entity.label_ in fullTermWeightBonusCoefficient else 1
+                        bonus_multiplier = self.config.full_term_weight_bonus[entity.label_] \
+                            if entity.label_ in self.config.full_term_weight_bonus else 1
 
-                        fullTerm = FullTerm(txt, additionalBonusMultiplier);
-                        mapFullTerm.setdefault(token.lemma_, set());
-                        mapFullTerm[token.lemma_].add(fullTerm);
+                        full_term = FullTerm(text, bonus_multiplier)
+                        full_term_map.setdefault(token.lemma_, set())
+                        full_term_map[token.lemma_].add(full_term)
 
-            if multipleOccuranceMultiplier:
-                weight = weight * occurance[txt]
+            if self.config.multiple_occurrence_multiplier:
+                weight = weight * occurrence[text]
 
-            cnt[txt] += weight
+            entity_weights[text] += weight
 
+        return entity_weights, full_term_map
+
+    def _resolve_ambiguity(self, full_terms, entity_weights):
+        """Pick the winning full phrase when a lemma maps to several of them.
+
+        Returns (is_ambiguity, ambiguity_winner). ambiguity_winner is None when the
+        phrases are tied (no clear winner) or when ambiguity resolution is disabled.
+        """
+        is_ambiguity = False
+        ambiguity_winner = None
+        if len(full_terms) > 1 and self.remove_ambiguity is True:
+            is_ambiguity = True
+            phrase_counts = Counter()
+
+            for full_term in full_terms:
+                text = full_term.text
+                phrase_counts[text] += entity_weights[text] or 1
+            ranked = phrase_counts.most_common()  # highest weight first
+            if ranked[0][1] != ranked[-1][1]:  # weights aren't all equal -> clear winner
+                ambiguity_winner = ranked[0][0]
+        return is_ambiguity, ambiguity_winner
+
+    def _merge_terms(self, node_weight, entity_weights, full_term_map):
+        """Combine TextRank scores with entity weights, promoting single tokens to
+        their multi-word entity phrase where that scores higher.
+
+        A multi-word phrase is amplified: each of its tokens compounds the phrase's
+        score. This is tracked with a per-phrase growth factor (starts at 1.0) that
+        multiplies up as tokens contribute, so the phrase weight (from entity_weights)
+        and the rank-based growth stay as separate factors.
+
+        All terms are scored (no early cutoff) so every contribution lands and the final
+        ranking is stable; the caller caps the number of tags returned.
+        """
         tags = dict()
+        phrase_growth = dict()
         node_weight = OrderedDict(sorted(node_weight.items(), key=lambda t: t[1], reverse=True))
-        for i, (key, value) in enumerate(node_weight.items()):
+        for term, rank_score in node_weight.items():
             # we are only interested in replacing the ones that have multi worded version
-            if key in mapFullTerm:
-                isAmbiguity = False
-                ambiguityWinner = None;
-                if len(mapFullTerm[key]) > 1 and self.removeAmbiguity is True:
-                    isAmbiguity = True
-                    pCnt = Counter()
+            if term in full_term_map:
+                is_ambiguity, ambiguity_winner = self._resolve_ambiguity(full_term_map[term], entity_weights)
 
-                    for fullTerm in mapFullTerm[key]:
-                        txt = fullTerm.txt
-                        pCnt[txt] += cnt[txt] or 1;
-                    if pCnt.most_common()[0][1] != pCnt.most_common()[len(pCnt) - 1][1]:
-                        ambiguityWinner = pCnt.most_common()[0][0]
+                single_weight = 0
+                if term in entity_weights:
+                    single_weight = entity_weights[term]
 
-                singleWeight = 0
-                if key in cnt:
-                    singleWeight = cnt[key]
-
-                if self.removeAmbiguity is True and isAmbiguity and ambiguityWinner is None:
-                    tags[key] = tags.setdefault(key, 0) + value
+                if self.remove_ambiguity is True and is_ambiguity and ambiguity_winner is None:
+                    # Ambiguous tie.
+                    # Example: Morgan Stanley and Morgan Freeman get the same weight.
+                    # The shared token "Morgan" maps to several equally-weighted entities,
+                    # so no single phrase wins. Keep the bare token "Morgan" with its
+                    # TextRank score only (no entity-weight multiplier), which is why this
+                    # score is small (a single term "Morgan" gets a small score).
+                    # The full phrases still get their proper score via
+                    # their own unique tokens (e.g. "Stanley" -> "Morgan Stanley", "Freeman" -> "Morgan Freeman")
+                    # so this just preserves the shared token instead of dropping it entirely.
+                    tags[term] = tags.setdefault(term, 0) + rank_score
                     continue
 
-                for fullTerm in mapFullTerm[key]:
-                    txt = fullTerm.txt
-                    weightBonus = fullTerm.weight
-                    if ambiguityWinner and ambiguityWinner != txt:
+                for full_term in full_term_map[term]:
+                    text = full_term.text
+                    weight_bonus = full_term.weight
+                    if ambiguity_winner and ambiguity_winner != text:
                         continue
 
-                    extraWeight = tags[txt] if txt in tags else 0
-                    multiWeight = (cnt[txt] + extraWeight) * weightBonus
+                    growth = phrase_growth.get(text, 1.0)
+                    multi_weight = entity_weights[text] * growth * weight_bonus
 
-                    # if multiWinsMode or multiWeight > singleWeight:
-                    #     tags[txt] = tags.setdefault(txt, 0) + value;
-                    # else:
-                    #     tags[key] = tags.setdefault(key, 0) + value;
-
-                    if singleWeight >= multiWeight:
-                        tags[key] = tags.setdefault(key, 0) + (value * singleWeight)
+                    if single_weight >= multi_weight:
+                        tags[term] = tags.setdefault(term, 0) + (rank_score * single_weight)
                     else:
-                        tags[txt] = tags.setdefault(txt, 0) + (value * multiWeight)
-
+                        tags[text] = tags.setdefault(text, 0) + (rank_score * multi_weight)
+                        phrase_growth[text] = growth * (1 + rank_score * weight_bonus)
 
             else:
-                weight = cnt[key]
+                weight = entity_weights[term]
                 if weight > 0:
-                    tags[key] = value * weight
+                    tags[term] = rank_score * weight
 
-            if i > number:
-                break
-
-        self.tags = OrderedDict(sorted(tags.items(), key=lambda t: t[1], reverse=True));
-        return self.tags;
+        return tags
 
     def to_json(self):
-        jsonObj = json.dumps(self.tags);
-        return jsonObj;
+        return json.dumps(self.tags)
 
 
 class FullTerm:
-    def __init__(self, txt, weight):
-        self.txt = txt
+    def __init__(self, text, weight):
+        self.text = text
         self.weight = weight
 
     def __eq__(self, other):
-        return isinstance(other, FullTerm) and self.txt == other.txt
+        return isinstance(other, FullTerm) and self.text == other.text
 
     def __hash__(self):
-        return hash(self.txt)
+        return hash(self.text)
 
     def __str__(self):
-        return f"{self.txt}:{self.weight}"
+        return f"{self.text}:{self.weight}"

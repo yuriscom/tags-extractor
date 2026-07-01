@@ -10,3 +10,4 @@ models/*
 layer/spacy/*
 !layer/spacy/Dockerfile
 *.zip
+data/*.csv

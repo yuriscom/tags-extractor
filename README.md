@@ -38,14 +38,14 @@ The script reads from `data/content2.txt` — replace its contents with whatever
 
 #### Lambda packaging files
 * `htmlparser.py`
-* `lmbda.py`
+* `lambda_index.py`
 * `spacy_module_loader.py`
 * `spacy_wrapper.py`
 * `text_keyword_extractor.py`
 
 #### Deploy commands
 ```bash
-zip tags-extractor.zip htmlparser.py lmbda.py spacy_module_loader.py spacy_wrapper.py text_keyword_extractor.py
+zip tags-extractor.zip htmlparser.py lambda_index.py spacy_module_loader.py spacy_wrapper.py text_keyword_extractor.py
 
 aws --profile=<your-profile> s3 cp tags-extractor.zip s3://<your-bucket>
 
@@ -57,6 +57,8 @@ aws lambda update-function-code \
   --s3-key tags-extractor.zip \
   --publish
 ```
+
+> **Note:** the Lambda function's **Handler** must be set to `lambda_index.lambda_handler`
 
 #### Lambda environment variables
 | Variable | Example value | Notes |
