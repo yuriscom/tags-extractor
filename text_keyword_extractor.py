@@ -1,17 +1,22 @@
 import json
 import re
 from collections import OrderedDict, Counter
+from dataclasses import dataclass, field
 
 import numpy as np
 from spacy.lang.en.stop_words import STOP_WORDS
 
-EXCLUDE_POS = ["PUNCT", "PART"]
-DEFAULT_ENTITY_LABEL_WEIGHTS = {
-    "PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5,
-    "WORK_OF_ART": 5, "DATE": 0,
-}
-MULTIPLE_OCCURRENCE_MULTIPLIER = True
-FULL_TERM_WEIGHT_BONUS = {"PERSON": 2}
+
+@dataclass
+class ExtractorConfig:
+    """Tunable parameters for tag extraction, passed to TagsExtractor."""
+    exclude_pos: list = field(default_factory=lambda: ["PUNCT", "PART"])
+    entity_label_weights: dict = field(default_factory=lambda: {
+        "PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5,
+        "WORK_OF_ART": 5, "DATE": 0,
+    })
+    multiple_occurrence_multiplier: bool = True
+    full_term_weight_bonus: dict = field(default_factory=lambda: {"PERSON": 2})
 
 
 class TextRank4Keyword():
@@ -135,11 +140,13 @@ class TextRank4Keyword():
 
 
 class TagsExtractor():
-    def __init__(self, nlp):
+    def __init__(self, nlp, config=None):
         self.nlp = nlp
+        self.config = config or ExtractorConfig()
         self.remove_ambiguity = True
         self.tags = OrderedDict()
-        self.entity_label_weights = DEFAULT_ENTITY_LABEL_WEIGHTS.copy()
+        # Per-instance copy so extract() can merge request labels without mutating the config.
+        self.entity_label_weights = self.config.entity_label_weights.copy()
 
     # labels: https://spacy.io/api/annotation#dependency-parsing
     def extract(self, text, labels, num=20):
@@ -180,7 +187,7 @@ class TagsExtractor():
             token_count = len(entity_doc)
 
             for token in entity_doc:
-                if token.pos_ not in EXCLUDE_POS:
+                if token.pos_ not in self.config.exclude_pos:
                     words.append(token.text)
 
             text = " ".join(words)
@@ -190,14 +197,14 @@ class TagsExtractor():
                 weight = self.entity_label_weights[entity.label_] if entity.label_ in self.entity_label_weights else 1
                 for token in entity_doc:
                     if token.is_stop is False:
-                        bonus_multiplier = FULL_TERM_WEIGHT_BONUS[entity.label_] \
-                            if entity.label_ in FULL_TERM_WEIGHT_BONUS else 1
+                        bonus_multiplier = self.config.full_term_weight_bonus[entity.label_] \
+                            if entity.label_ in self.config.full_term_weight_bonus else 1
 
                         full_term = FullTerm(text, bonus_multiplier)
                         full_term_map.setdefault(token.lemma_, set())
                         full_term_map[token.lemma_].add(full_term)
 
-            if MULTIPLE_OCCURRENCE_MULTIPLIER:
+            if self.config.multiple_occurrence_multiplier:
                 weight = weight * occurrence[text]
 
             entity_weights[text] += weight
