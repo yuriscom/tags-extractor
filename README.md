@@ -34,6 +34,76 @@ The script reads from `data/content2.txt` — replace its contents with whatever
 
 ---
 
+## Output: two contracts
+
+`TagsExtractor` exposes two independent outputs. They can be used side by side.
+
+### 1. Legacy tags map
+
+`extract()` returns an `OrderedDict` of `{term: score}` ranked highest-first, and `to_json()`
+serializes it. This is what the Lambda handler (`lambda_index.py`) and `local_lambda.py` use, so
+running `local_lambda.py` still prints the flat map — that behavior is unchanged on purpose, since it
+is the deployed API.
+
+```python
+extractor.extract(text, labels, num=20)   # -> {"Target Corporation": 20.0, "loyalty program": 12.4, ...}
+extractor.to_json()                        # -> JSON string of the same map
+```
+
+### 2. Structured enrichment output
+
+`extract_features()` returns an `ArticleEnrichmentResult` that keeps keyphrases and named entities as
+**separate** signals, each with counts, scores, and (for entities) character offsets and sentence
+context. Use this for storage/search-indexing rather than the flat map.
+
+```python
+from spacy_wrapper import SpacyWrapper
+from text_keyword_extractor import TagsExtractor, to_enrichment_columns
+
+nlp = SpacyWrapper().init()
+extractor = TagsExtractor(nlp)
+
+labels = {"PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5, "WORK_OF_ART": 5}
+result = extractor.extract_features(text, labels, num=20)
+
+result.keywords          # list[Keyword] — ranked keyphrases (same scoring as extract())
+result.entities          # list[Entity] — spaCy entities grouped by (normalized, label)
+result.enrichment_error  # None on success, else the error message (extraction never raises)
+
+columns = to_enrichment_columns(result)   # dict of JSON-string columns, ready to store/index
+```
+
+**`keywords`** items:
+
+```json
+{ "text": "loyalty program", "normalized": "loyalty program", "type": "keyphrase",
+  "score": 12.42, "count": 1, "source_fields": ["content"], "evidence": [] }
+```
+
+**`entities`** items:
+
+```json
+{ "text": "Target Corporation", "normalized": "target corporation", "label": "ORG",
+  "score": 10.0, "count": 2, "label_weight": 5.0, "is_multi_word": true,
+  "first_seen_field": "content", "source_fields": ["content"],
+  "mentions": [ { "field": "content", "start": 240, "end": 258,
+                  "text": "Target Corporation", "sentence": "Target Corporation announced ..." } ] }
+```
+
+**`to_enrichment_columns(result)`** returns these keys (each value is a JSON string except the last
+three): `keywords_json`, `entities_json`, `keyword_texts_json`, `entity_texts_json`,
+`entity_labels_json`, `entity_pairs_json`, `enrichment_version`, `enrichment_processed_at`,
+`enrichment_error`.
+
+For debugging, **`to_enrichment_dict(result)`** returns the whole result as one nested dict, so
+`json.dumps(to_enrichment_dict(result), indent=2, ensure_ascii=False)` gives a readable, paste-ready
+JSON document.
+
+Entity label filtering/weighting, mention limits, and `num` are configurable via `ExtractorConfig`
+(passed as `TagsExtractor(nlp, config=...)`).
+
+---
+
 ## AWS Lambda deployment
 
 #### Lambda packaging files

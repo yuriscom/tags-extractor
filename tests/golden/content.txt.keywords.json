@@ -1,0 +1,222 @@
+[
+  {
+    "text": "Ms Barrett",
+    "normalized": "ms barrett",
+    "type": "keyphrase",
+    "score": 43947.841821493435,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Supreme Court",
+    "normalized": "supreme court",
+    "type": "keyphrase",
+    "score": 2778.5036499222115,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "ADF",
+    "normalized": "adf",
+    "type": "keyphrase",
+    "score": 1153.4410929497851,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Blackstone",
+    "normalized": "blackstone",
+    "type": "keyphrase",
+    "score": 969.9406312973432,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Religious Liberties Practice Group Executive Committee",
+    "normalized": "religious liberties practice group executive committee",
+    "type": "keyphrase",
+    "score": 133.6667874702316,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Washington Post",
+    "normalized": "washington post",
+    "type": "keyphrase",
+    "score": 116.14231235005352,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Ruth Bader Ginsburg",
+    "normalized": "ruth bader ginsburg",
+    "type": "keyphrase",
+    "score": 82.81369004608258,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Alliance Defending Freedom",
+    "normalized": "alliance defending freedom",
+    "type": "keyphrase",
+    "score": 72.46417520338797,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Allison Jones Rushing",
+    "normalized": "allison jones rushing",
+    "type": "keyphrase",
+    "score": 56.20646834705231,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Michael Moreland",
+    "normalized": "michael moreland",
+    "type": "keyphrase",
+    "score": 42.48806583947723,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Joe Murray",
+    "normalized": "joe murray",
+    "type": "keyphrase",
+    "score": 38.35360141293418,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Dianne Feinstein",
+    "normalized": "dianne feinstein",
+    "type": "keyphrase",
+    "score": 36.13111577247195,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Al Franken",
+    "normalized": "al franken",
+    "type": "keyphrase",
+    "score": 32.442847841308584,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Jeffery Ventrella",
+    "normalized": "jeffery ventrella",
+    "type": "keyphrase",
+    "score": 32.06025391272474,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Alliance Defence Fund",
+    "normalized": "alliance defence fund",
+    "type": "keyphrase",
+    "score": 30.681901537046613,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Craig Osten",
+    "normalized": "craig osten",
+    "type": "keyphrase",
+    "score": 30.597706635054326,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Jeremy Tedesco",
+    "normalized": "jeremy tedesco",
+    "type": "keyphrase",
+    "score": 29.613736660070224,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Ron DeSantis",
+    "normalized": "ron desantis",
+    "type": "keyphrase",
+    "score": 29.05906381464405,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Tim Chandler",
+    "normalized": "tim chandler",
+    "type": "keyphrase",
+    "score": 27.647016162694875,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Trump",
+    "normalized": "trump",
+    "type": "keyphrase",
+    "score": 27.086258746087616,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  }
+]

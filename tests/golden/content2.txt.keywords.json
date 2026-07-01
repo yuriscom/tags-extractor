@@ -1,0 +1,200 @@
+[
+  {
+    "text": "Apple",
+    "normalized": "apple",
+    "type": "keyphrase",
+    "score": 93.50751666666666,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Sam Altman",
+    "normalized": "sam altman",
+    "type": "keyphrase",
+    "score": 33.63389209201389,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Tim Cook",
+    "normalized": "tim cook",
+    "type": "keyphrase",
+    "score": 23.833876622839508,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "European Union",
+    "normalized": "european union",
+    "type": "keyphrase",
+    "score": 15.0,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Competition and Markets Authority",
+    "normalized": "competition and markets authority",
+    "type": "keyphrase",
+    "score": 15.0,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "OpenAI",
+    "normalized": "openai",
+    "type": "keyphrase",
+    "score": 14.097472222222223,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Morgan Stanley",
+    "normalized": "morgan stanley",
+    "type": "keyphrase",
+    "score": 13.10715755996576,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Samsung",
+    "normalized": "samsung",
+    "type": "keyphrase",
+    "score": 1.1369208333333334,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "UK",
+    "normalized": "uk",
+    "type": "keyphrase",
+    "score": 1.0,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Android",
+    "normalized": "android",
+    "type": "keyphrase",
+    "score": 0.9883006944444445,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Cupertino",
+    "normalized": "cupertino",
+    "type": "keyphrase",
+    "score": 0.8704694444444445,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "California",
+    "normalized": "california",
+    "type": "keyphrase",
+    "score": 0.8704694444444444,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "iPhone",
+    "normalized": "iphone",
+    "type": "keyphrase",
+    "score": 0.8704694444444444,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "AI",
+    "normalized": "ai",
+    "type": "keyphrase",
+    "score": 0.8213701388888889,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Microsoft",
+    "normalized": "microsoft",
+    "type": "keyphrase",
+    "score": 0.5551666666666666,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Nasdaq",
+    "normalized": "nasdaq",
+    "type": "keyphrase",
+    "score": 0.4322472222222223,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Google",
+    "normalized": "google",
+    "type": "keyphrase",
+    "score": 0.15000000000000002,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Meta",
+    "normalized": "meta",
+    "type": "keyphrase",
+    "score": 0.15000000000000002,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  }
+]

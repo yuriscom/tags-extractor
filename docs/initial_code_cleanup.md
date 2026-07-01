@@ -1,7 +1,7 @@
 # Cleanup Plan
 
 > **Scope:** This is a strict, behavior-preserving lift-and-shift. Every step must leave the
-> `tags` / `candidate_terms` output byte-for-byte identical, verified against golden files
+> `tags` / `keywords` output byte-for-byte identical, verified against golden files
 > (Phase 0). Anything that would change output is explicitly **out of scope** and tracked in
 > [Deferred behavioral issues](#deferred-behavioral-issues-post-cleanup) for a follow-up pass.
 

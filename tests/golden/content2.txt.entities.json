@@ -1,0 +1,470 @@
+[
+  {
+    "text": "Apple",
+    "normalized": "apple",
+    "label": "ORG",
+    "score": 35.0,
+    "count": 7,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 111,
+        "end": 116,
+        "text": "Apple",
+        "sentence": "Apple Inc. announced a major partnership with OpenAI on Tuesday, bringing ChatGPT directly into Siri and other Apple products."
+      },
+      {
+        "field": "content",
+        "start": 137,
+        "end": 142,
+        "text": "Apple",
+        "sentence": "Tim Cook, Apple's CEO, described the deal as a significant step toward making artificial intelligence more personal and accessible to everyday users."
+      },
+      {
+        "field": "content",
+        "start": 305,
+        "end": 310,
+        "text": "Apple",
+        "sentence": "The agreement, revealed at Apple's Worldwide Developers Conference in Cupertino, California, will allow iPhone and Mac users to invoke ChatGPT through Siri without switching apps."
+      }
+    ]
+  },
+  {
+    "text": "OpenAI",
+    "normalized": "openai",
+    "label": "GPE",
+    "score": 6.0,
+    "count": 4,
+    "label_weight": 1.5,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 46,
+        "end": 52,
+        "text": "OpenAI",
+        "sentence": "Apple Inc. announced a major partnership with OpenAI on Tuesday, bringing ChatGPT directly into Siri and other Apple products."
+      },
+      {
+        "field": "content",
+        "start": 481,
+        "end": 487,
+        "text": "OpenAI",
+        "sentence": "Sam Altman, the CEO of OpenAI, attended the event and called the collaboration a milestone for both companies."
+      },
+      {
+        "field": "content",
+        "start": 919,
+        "end": 925,
+        "text": "OpenAI",
+        "sentence": "Microsoft, which has invested heavily in OpenAI, saw a smaller gain of 2%."
+      }
+    ]
+  },
+  {
+    "text": "AI",
+    "normalized": "ai",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 801,
+        "end": 803,
+        "text": "AI",
+        "sentence": "Analysts at Morgan Stanley suggested the partnership could give Apple a competitive edge over Samsung and other Android device makers in the AI assistant market."
+      }
+    ]
+  },
+  {
+    "text": "Android",
+    "normalized": "android",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 772,
+        "end": 779,
+        "text": "Android",
+        "sentence": "Analysts at Morgan Stanley suggested the partnership could give Apple a competitive edge over Samsung and other Android device makers in the AI assistant market."
+      }
+    ]
+  },
+  {
+    "text": "Apple Inc.",
+    "normalized": "apple inc.",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 0,
+        "end": 10,
+        "text": "Apple Inc.",
+        "sentence": "Apple Inc. announced a major partnership with OpenAI on Tuesday, bringing ChatGPT directly into Siri and other Apple products."
+      }
+    ]
+  },
+  {
+    "text": "Competition and Markets Authority",
+    "normalized": "competition and markets authority",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1404,
+        "end": 1437,
+        "text": "Competition and Markets Authority",
+        "sentence": "The UK's Competition and Markets Authority also indicated it would monitor the deal closely."
+      }
+    ]
+  },
+  {
+    "text": "European Union's",
+    "normalized": "european union's",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1285,
+        "end": 1305,
+        "text": "The European Union's",
+        "sentence": "The European Union's digital regulators said they would review the arrangement under the Digital Markets Act."
+      }
+    ]
+  },
+  {
+    "text": "Google",
+    "normalized": "google",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 570,
+        "end": 576,
+        "text": "Google",
+        "sentence": "Google, which has its own Gemini AI assistant, was not immediately available for comment."
+      }
+    ]
+  },
+  {
+    "text": "iPhone",
+    "normalized": "iphone",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 382,
+        "end": 388,
+        "text": "iPhone",
+        "sentence": "The agreement, revealed at Apple's Worldwide Developers Conference in Cupertino, California, will allow iPhone and Mac users to invoke ChatGPT through Siri without switching apps."
+      }
+    ]
+  },
+  {
+    "text": "Meta",
+    "normalized": "meta",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 953,
+        "end": 957,
+        "text": "Meta",
+        "sentence": "Meta, still developing its own AI products, did not comment publicly on the deal."
+      }
+    ]
+  },
+  {
+    "text": "Microsoft",
+    "normalized": "microsoft",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 878,
+        "end": 887,
+        "text": "Microsoft",
+        "sentence": "Microsoft, which has invested heavily in OpenAI, saw a smaller gain of 2%."
+      }
+    ]
+  },
+  {
+    "text": "Morgan Stanley",
+    "normalized": "morgan stanley",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 672,
+        "end": 686,
+        "text": "Morgan Stanley",
+        "sentence": "Analysts at Morgan Stanley suggested the partnership could give Apple a competitive edge over Samsung and other Android device makers in the AI assistant market."
+      }
+    ]
+  },
+  {
+    "text": "Nasdaq",
+    "normalized": "nasdaq",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 870,
+        "end": 876,
+        "text": "Nasdaq",
+        "sentence": "The announcement sent Apple stock up 7% on the Nasdaq."
+      }
+    ]
+  },
+  {
+    "text": "Sam Altman",
+    "normalized": "sam altman",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 458,
+        "end": 468,
+        "text": "Sam Altman",
+        "sentence": "Sam Altman, the CEO of OpenAI, attended the event and called the collaboration a milestone for both companies."
+      }
+    ]
+  },
+  {
+    "text": "Samsung",
+    "normalized": "samsung",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 754,
+        "end": 761,
+        "text": "Samsung",
+        "sentence": "Analysts at Morgan Stanley suggested the partnership could give Apple a competitive edge over Samsung and other Android device makers in the AI assistant market."
+      }
+    ]
+  },
+  {
+    "text": "Tim Cook",
+    "normalized": "tim cook",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 127,
+        "end": 135,
+        "text": "Tim Cook",
+        "sentence": "Tim Cook, Apple's CEO, described the deal as a significant step toward making artificial intelligence more personal and accessible to everyday users."
+      }
+    ]
+  },
+  {
+    "text": "California",
+    "normalized": "california",
+    "label": "GPE",
+    "score": 1.5,
+    "count": 1,
+    "label_weight": 1.5,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 359,
+        "end": 369,
+        "text": "California",
+        "sentence": "The agreement, revealed at Apple's Worldwide Developers Conference in Cupertino, California, will allow iPhone and Mac users to invoke ChatGPT through Siri without switching apps."
+      }
+    ]
+  },
+  {
+    "text": "Cupertino",
+    "normalized": "cupertino",
+    "label": "GPE",
+    "score": 1.5,
+    "count": 1,
+    "label_weight": 1.5,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 348,
+        "end": 357,
+        "text": "Cupertino",
+        "sentence": "The agreement, revealed at Apple's Worldwide Developers Conference in Cupertino, California, will allow iPhone and Mac users to invoke ChatGPT through Siri without switching apps."
+      }
+    ]
+  },
+  {
+    "text": "UK",
+    "normalized": "uk",
+    "label": "GPE",
+    "score": 1.5,
+    "count": 1,
+    "label_weight": 1.5,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1399,
+        "end": 1401,
+        "text": "UK",
+        "sentence": "The UK's Competition and Markets Authority also indicated it would monitor the deal closely."
+      }
+    ]
+  },
+  {
+    "text": "Gemini AI",
+    "normalized": "gemini ai",
+    "label": "LOC",
+    "score": 1.0,
+    "count": 1,
+    "label_weight": 1.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 596,
+        "end": 605,
+        "text": "Gemini AI",
+        "sentence": "Google, which has its own Gemini AI assistant, was not immediately available for comment."
+      }
+    ]
+  }
+]

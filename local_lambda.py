@@ -28,6 +28,7 @@ def main():
     response = lambda_index.lambda_handler({
         "body": {
             "data": text,
+            "extract_type": "features", # features | tags
             # "labels": ["PERSON", "ORG", "NORP", "FAC", "EVENT", "PRODUCT", "WORK_OF_ART"],
             "labels": {"PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5,
                        "WORK_OF_ART": 5},

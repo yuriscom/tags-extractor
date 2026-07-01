@@ -1,0 +1,1326 @@
+[
+  {
+    "text": "ADF",
+    "normalized": "adf",
+    "label": "ORG",
+    "score": 105.0,
+    "count": 21,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1625,
+        "end": 1628,
+        "text": "ADF",
+        "sentence": "When Ms Barrett was before the Senate in 2017, to be confirmed as a judge on the US Court of Appeal for the 7th Circuit, she was asked about those speaking engagements and grilled particularly on the ADF's stance on gay rights."
+      },
+      {
+        "field": "content",
+        "start": 5689,
+        "end": 5692,
+        "text": "ADF",
+        "sentence": "Al Franken, a Democratic senator from Minnesota at the time, asked Ms Barrett in 2017 why she agreed to speak at the ADF's training programme, for a group that he said \\\"fights against equal treatment of LGBT people.\\\" She participated in the program once in Alexandria, Va., and four times in Phoeni"
+      },
+      {
+        "field": "content",
+        "start": 5884,
+        "end": 5887,
+        "text": "ADF",
+        "sentence": "Al Franken, a Democratic senator from Minnesota at the time, asked Ms Barrett in 2017 why she agreed to speak at the ADF's training programme, for a group that he said \\\"fights against equal treatment of LGBT people.\\\" She participated in the program once in Alexandria, Va., and four times in Phoeni"
+      }
+    ]
+  },
+  {
+    "text": "Blackstone",
+    "normalized": "blackstone",
+    "label": "ORG",
+    "score": 100.0,
+    "count": 20,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1023,
+        "end": 1033,
+        "text": "Blackstone",
+        "sentence": "The Blackstone programme is run by Alliance Defending Freedom (ADF), a legal advocacy group whose founding leader has questioned the \\\"so-called separation of church and state\\\" as it is often understood."
+      },
+      {
+        "field": "content",
+        "start": 3441,
+        "end": 3451,
+        "text": "Blackstone",
+        "sentence": "Last week, Hawley who also has served as a Blackstone faculty member - said Barrett \\\"clearly meets that threshold.\\\" As a federal appellate judge, MsBarrett has ruled skeptically about a broad interpretation of abortion rights and has shown a willingness to entertain state restrictions on the proce"
+      },
+      {
+        "field": "content",
+        "start": 6077,
+        "end": 6087,
+        "text": "Blackstone",
+        "sentence": "Ms Barrett told Franken that she was not aware of all of the ADF's policy positions and that she agreed to speak at Blackstone because colleagues and some of her students at Notre Dame University's law school had participated in it."
+      }
+    ]
+  },
+  {
+    "text": "Ms Barrett",
+    "normalized": "ms barrett",
+    "label": "PERSON",
+    "score": 75.0,
+    "count": 15,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1430,
+        "end": 1440,
+        "text": "Ms Barrett",
+        "sentence": "When Ms Barrett was before the Senate in 2017, to be confirmed as a judge on the US Court of Appeal for the 7th Circuit, she was asked about those speaking engagements and grilled particularly on the ADF's stance on gay rights."
+      },
+      {
+        "field": "content",
+        "start": 1899,
+        "end": 1909,
+        "text": "Ms Barrett",
+        "sentence": "\\\"I would never impose my own personal convictions upon the law,\\\" Ms Barrett said at the time, when asked whether her deeply held faith was at odds with her ability to render impartial judgments."
+      },
+      {
+        "field": "content",
+        "start": 4804,
+        "end": 4814,
+        "text": "Ms Barrett",
+        "sentence": "Read more In her 2017 confirmation hearing, in response to the suggestion that she might be a \\\"no vote on Roe,\\\" Ms Barrett said: \\\"I'm being considered for a position on a Court of Appeals, and there would be no opportunity to be a no vote on Roe."
+      }
+    ]
+  },
+  {
+    "text": "Supreme Court",
+    "normalized": "supreme court",
+    "label": "ORG",
+    "score": 35.0,
+    "count": 7,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 92,
+        "end": 109,
+        "text": "the Supreme Court",
+        "sentence": "Judge Amy Coney Barrett, President Donald Trump's nominee to replace Ruth Bader Ginsburg on the Supreme Court, publicly grappled decades ago with the tension Catholic judges can face between their religious values and the law."
+      },
+      {
+        "field": "content",
+        "start": 4330,
+        "end": 4343,
+        "text": "Supreme Court",
+        "sentence": "Although the majority wrote that it was bound by a Supreme Court precedent, it questioned whether that precedent had been undermined by subsequent decisions on the subject."
+      },
+      {
+        "field": "content",
+        "start": 4663,
+        "end": 4676,
+        "text": "Supreme Court",
+        "sentence": "Appeals court judges are bound by precedent in a way that justices are not; only the latter can overturn Supreme Court precedent."
+      }
+    ]
+  },
+  {
+    "text": "Barrett",
+    "normalized": "barrett",
+    "label": "PERSON",
+    "score": 30.0,
+    "count": 6,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 632,
+        "end": 639,
+        "text": "Barrett",
+        "sentence": "Barrett was a paid speaker five times, starting in 2011, at the Blackstone Legal Fellowship, a summer program established to inspire a \\\"distinctly Christian worldview in every area of law,\\\" tax filings show."
+      },
+      {
+        "field": "content",
+        "start": 1237,
+        "end": 1244,
+        "text": "Barrett",
+        "sentence": "In the years Barrett spoke there, the fellowship's suggested reading list included a book co-written by the same leader who lamented how Christians for too long had been \\\"AWOL from the courthouse\\\"."
+      },
+      {
+        "field": "content",
+        "start": 1801,
+        "end": 1808,
+        "text": "Barrett",
+        "sentence": "Senators did not address the program's goal of connecting Christian teachings to the practice of law, which has been little noted in the context of Barrett's role on the courts."
+      }
+    ]
+  },
+  {
+    "text": "Christian",
+    "normalized": "christian",
+    "label": "NORP",
+    "score": 21.0,
+    "count": 7,
+    "label_weight": 3.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 363,
+        "end": 372,
+        "text": "Christian",
+        "sentence": "But her role as a speaker at a training programme for Christian law school students drew scrutiny three years ago when Trump nominated her to be a federal appellate judge."
+      },
+      {
+        "field": "content",
+        "start": 780,
+        "end": 789,
+        "text": "Christian",
+        "sentence": "Barrett was a paid speaker five times, starting in 2011, at the Blackstone Legal Fellowship, a summer program established to inspire a \\\"distinctly Christian worldview in every area of law,\\\" tax filings show."
+      },
+      {
+        "field": "content",
+        "start": 1711,
+        "end": 1720,
+        "text": "Christian",
+        "sentence": "Senators did not address the program's goal of connecting Christian teachings to the practice of law, which has been little noted in the context of Barrett's role on the courts."
+      }
+    ]
+  },
+  {
+    "text": "MsBarrett",
+    "normalized": "msbarrett",
+    "label": "PERSON",
+    "score": 20.0,
+    "count": 4,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2972,
+        "end": 2981,
+        "text": "MsBarrett",
+        "sentence": "MsBarrett, a favourite of social conservatives, has argued that justices should not be bound by a court precedent that they believe is out of step with the Constitution."
+      },
+      {
+        "field": "content",
+        "start": 3547,
+        "end": 3556,
+        "text": "MsBarrett",
+        "sentence": "Last week, Hawley who also has served as a Blackstone faculty member - said Barrett \\\"clearly meets that threshold.\\\" As a federal appellate judge, MsBarrett has ruled skeptically about a broad interpretation of abortion rights and has shown a willingness to entertain state restrictions on the proce"
+      },
+      {
+        "field": "content",
+        "start": 3874,
+        "end": 3883,
+        "text": "MsBarrett",
+        "sentence": "In the most notable abortion case, MsBarrett joined in a dissent that said the Supreme Court's decision in Planned Parenthood v. Casey, which reinforced the right of a woman to choose abortion before viability, had not considered whether the reason for choosing to terminate a pregnancy might matter."
+      }
+    ]
+  },
+  {
+    "text": "Senate",
+    "normalized": "senate",
+    "label": "ORG",
+    "score": 20.0,
+    "count": 4,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1456,
+        "end": 1462,
+        "text": "Senate",
+        "sentence": "When Ms Barrett was before the Senate in 2017, to be confirmed as a judge on the US Court of Appeal for the 7th Circuit, she was asked about those speaking engagements and grilled particularly on the ADF's stance on gay rights."
+      },
+      {
+        "field": "content",
+        "start": 13305,
+        "end": 13311,
+        "text": "Senate",
+        "sentence": "MsBarrett said on a financial disclosure form submitted to the Senate in 2017 that she had received two $2,100 (£1,630) payments from ADF during the previous two years."
+      },
+      {
+        "field": "content",
+        "start": 13672,
+        "end": 13678,
+        "text": "Senate",
+        "sentence": "She also submitted to the Senate a 24-page slide show and four-page handout that appeared to have been used for her Blackstone presentations."
+      }
+    ]
+  },
+  {
+    "text": "Alliance Defending Freedom",
+    "normalized": "alliance defending freedom",
+    "label": "ORG",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1054,
+        "end": 1080,
+        "text": "Alliance Defending Freedom",
+        "sentence": "The Blackstone programme is run by Alliance Defending Freedom (ADF), a legal advocacy group whose founding leader has questioned the \\\"so-called separation of church and state\\\" as it is often understood."
+      },
+      {
+        "field": "content",
+        "start": 7035,
+        "end": 7061,
+        "text": "Alliance Defending Freedom",
+        "sentence": "In 2015, the website was apparently redesigned; the ADF logo no longer appeared, but the site clearly stated that the fellowship \\\"is a program of Alliance Defending Freedom, an alliance-building legal ministry that advocates for the right of people to freely live out their faith.\\\" Ms Barrett is a "
+      },
+      {
+        "field": "content",
+        "start": 8851,
+        "end": 8877,
+        "text": "Alliance Defending Freedom",
+        "sentence": "Read more The group changed its name to Alliance Defending Freedom in 2012 and has grown into a legal and financial powerhouse."
+      }
+    ]
+  },
+  {
+    "text": "Franken",
+    "normalized": "franken",
+    "label": "PERSON",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 5946,
+        "end": 5953,
+        "text": "Franken",
+        "sentence": "Al Franken, a Democratic senator from Minnesota at the time, asked Ms Barrett in 2017 why she agreed to speak at the ADF's training programme, for a group that he said \\\"fights against equal treatment of LGBT people.\\\" She participated in the program once in Alexandria, Va., and four times in Phoeni"
+      },
+      {
+        "field": "content",
+        "start": 5977,
+        "end": 5984,
+        "text": "Franken",
+        "sentence": "Ms Barrett told Franken that she was not aware of all of the ADF's policy positions and that she agreed to speak at Blackstone because colleagues and some of her students at Notre Dame University's law school had participated in it."
+      },
+      {
+        "field": "content",
+        "start": 6258,
+        "end": 6265,
+        "text": "Franken",
+        "sentence": "Franken resigned later in 2017 over allegations of sexual misconduct."
+      }
+    ]
+  },
+  {
+    "text": "Sears",
+    "normalized": "sears",
+    "label": "ORG",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10986,
+        "end": 10991,
+        "text": "Sears",
+        "sentence": "\\\"We can no longer ignore the legal realm.\\\" Sears and Osten did not respond to emails and calls."
+      },
+      {
+        "field": "content",
+        "start": 11134,
+        "end": 11139,
+        "text": "Sears",
+        "sentence": "The ADF told The Washington Post that the book was removed from the reading list shortly after Sears stepped down as the group's president and chief executive in 2017."
+      },
+      {
+        "field": "content",
+        "start": 11224,
+        "end": 11229,
+        "text": "Sears",
+        "sentence": "Another book by Sears and Osten, also since removed from the reading list, referenced the \\\"so-called separation of church and state,\\\" arguing that the concept has been widely misunderstood as requiring the censorship of religious speech in public life."
+      }
+    ]
+  },
+  {
+    "text": "Trump",
+    "normalized": "trump",
+    "label": "ORG",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 12186,
+        "end": 12191,
+        "text": "Trump",
+        "sentence": "In the years that Ms Barrett spoke to Blackstone fellows, the programme was overseen by the ADF's senior vice president, Jeffery Ventrella, who sits on the Religious Liberties Practice Group Executive Committee of the Federalist Society, the powerful conservative legal group that has helped shape Tr"
+      },
+      {
+        "field": "content",
+        "start": 14663,
+        "end": 14668,
+        "text": "Trump",
+        "sentence": "Judge Lawrence VanDyke, who was nominated by Trump to the US Court of Appeals for the 9th Circuit last year, was a Blackstone fellow in 2003."
+      },
+      {
+        "field": "content",
+        "start": 15038,
+        "end": 15043,
+        "text": "Trump",
+        "sentence": "Judge Allison Jones Rushing, named to the 4th Circuit Court by Trump last year at age 37, said in documents filed to the Senate that she participated in a \\\"summer program for law students\\\" run by the ADF."
+      }
+    ]
+  },
+  {
+    "text": "Washington Post",
+    "normalized": "washington post",
+    "label": "ORG",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 11052,
+        "end": 11071,
+        "text": "The Washington Post",
+        "sentence": "The ADF told The Washington Post that the book was removed from the reading list shortly after Sears stepped down as the group's president and chief executive in 2017."
+      },
+      {
+        "field": "content",
+        "start": 12953,
+        "end": 12972,
+        "text": "The Washington Post",
+        "sentence": "In its 2019 tax filing, the ADF said Blackstone was meant to prepare Christian law students \\\"to adhere to the practice of their faith in the legal profession, an arena often hostile to Christianity.\\\" Read more Tim Chandler, the ADF senior vice president who took over running Blackstone from Ventre"
+      },
+      {
+        "field": "content",
+        "start": 15443,
+        "end": 15462,
+        "text": "The Washington Post",
+        "sentence": "Two decades ago, in their earliest accounts of the Blackstone programme, its founders set their sights even higher: Fellows, they wrote in tax filings, would go on to positions of influence as scholars, litigators and \\\"perhaps even Supreme Court Justices.\\\" The Washington Post"
+      }
+    ]
+  },
+  {
+    "text": "\\\"Judge Barrett",
+    "normalized": "\\\"judge barrett",
+    "label": "PERSON",
+    "score": 10.0,
+    "count": 2,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2141,
+        "end": 2156,
+        "text": "\\\"Judge Barrett",
+        "sentence": "Watch more Judd Deere, a White House spokesman, said in a statement in response to questions for this report: \\\"Judge Barrett has said that as a judge she's not a policymaker and that it's not appropriate for her or any judge to follow their personal convictions in deciding a case, which is also one"
+      },
+      {
+        "field": "content",
+        "start": 2581,
+        "end": 2596,
+        "text": "\\\"Judge Barrett",
+        "sentence": "\\\"Judge Barrett has proven herself a highly capable legal scholar and jurist committed to the Constitution and the rule of law, and all Americans including but especially Catholics should recoil at the suggestion that her faith and personal life would prescribe otherwise,\\\" Michael Moreland, a profe"
+      }
+    ]
+  },
+  {
+    "text": "Feinstein",
+    "normalized": "feinstein",
+    "label": "PERSON",
+    "score": 10.0,
+    "count": 2,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 5149,
+        "end": 5158,
+        "text": "Feinstein",
+        "sentence": "And as I said to the [Judiciary] Committee, I would faithfully apply all Supreme Court precedent.\\\" Also in that hearing, Sen. Dianne Feinstein, D-Calif., told Ms Barrett that based on her public statements, Feinstein was uncomfortable with the nomination because \\\"the dogma lives loudly within you."
+      },
+      {
+        "field": "content",
+        "start": 5305,
+        "end": 5314,
+        "text": "Feinstein",
+        "sentence": "And as I said to the [Judiciary] Committee, I would faithfully apply all Supreme Court precedent.\\\" Also in that hearing, Sen. Dianne Feinstein, D-Calif., told Ms Barrett that based on her public statements, Feinstein was uncomfortable with the nomination because \\\"the dogma lives loudly within you."
+      }
+    ]
+  },
+  {
+    "text": "Murray",
+    "normalized": "murray",
+    "label": "PERSON",
+    "score": 10.0,
+    "count": 2,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10254,
+        "end": 10260,
+        "text": "Murray",
+        "sentence": "\\\"Just like the Greeks inside the Trojan Horse, the idea seemed to be an attempt to carefully sneak these budding Christian legal warriors into the courts to change the culture through judicial opinion,\\\" Murray, who is gay, wrote in his 2015 book \\\"Odd Man Out.\\\" The ADF did not respond to question"
+      },
+      {
+        "field": "content",
+        "start": 10357,
+        "end": 10363,
+        "text": "Murray",
+        "sentence": "\\\"Just like the Greeks inside the Trojan Horse, the idea seemed to be an attempt to carefully sneak these budding Christian legal warriors into the courts to change the culture through judicial opinion,\\\" Murray, who is gay, wrote in his 2015 book \\\"Odd Man Out.\\\" The ADF did not respond to question"
+      }
+    ]
+  },
+  {
+    "text": "Catholic",
+    "normalized": "catholic",
+    "label": "NORP",
+    "score": 9.0,
+    "count": 3,
+    "label_weight": 3.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 158,
+        "end": 166,
+        "text": "Catholic",
+        "sentence": "Judge Amy Coney Barrett, President Donald Trump's nominee to replace Ruth Bader Ginsburg on the Supreme Court, publicly grappled decades ago with the tension Catholic judges can face between their religious values and the law."
+      },
+      {
+        "field": "content",
+        "start": 292,
+        "end": 300,
+        "text": "Catholic",
+        "sentence": "She has since said that she would never bend the law to meet her Catholic faith."
+      },
+      {
+        "field": "content",
+        "start": 7475,
+        "end": 7483,
+        "text": "Catholic",
+        "sentence": "Read more Early in her career, in 1998, Ms Barrett co-wrote a paper arguing that Catholic judges who oppose capital punishment on religious grounds are \\\"morally precluded from enforcing the death penalty\\\" and should recuse themselves rather than sign an execution order."
+      }
+    ]
+  },
+  {
+    "text": "Christians",
+    "normalized": "christians",
+    "label": "NORP",
+    "score": 6.0,
+    "count": 2,
+    "label_weight": 3.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1361,
+        "end": 1371,
+        "text": "Christians",
+        "sentence": "In the years Barrett spoke there, the fellowship's suggested reading list included a book co-written by the same leader who lamented how Christians for too long had been \\\"AWOL from the courthouse\\\"."
+      },
+      {
+        "field": "content",
+        "start": 10693,
+        "end": 10703,
+        "text": "Christians",
+        "sentence": "The authors wrote that same-sex relationships led to \\\"despair, disease and early death.\\\" Read more \\\"For many years, the church and Christians were essentially AWOL from the courthouse while dozens of legal cases were litigated, setting precedents the homosexual activists rely on today,\\\" Sears an"
+      }
+    ]
+  },
+  {
+    "text": "4th Circuit Court",
+    "normalized": "4th circuit court",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 15013,
+        "end": 15034,
+        "text": "the 4th Circuit Court",
+        "sentence": "Judge Allison Jones Rushing, named to the 4th Circuit Court by Trump last year at age 37, said in documents filed to the Senate that she participated in a \\\"summer program for law students\\\" run by the ADF."
+      }
+    ]
+  },
+  {
+    "text": "7th Circuit",
+    "normalized": "7th circuit",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1529,
+        "end": 1544,
+        "text": "the 7th Circuit",
+        "sentence": "When Ms Barrett was before the Senate in 2017, to be confirmed as a judge on the US Court of Appeal for the 7th Circuit, she was asked about those speaking engagements and grilled particularly on the ADF's stance on gay rights."
+      }
+    ]
+  },
+  {
+    "text": "9th Circuit",
+    "normalized": "9th circuit",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 14700,
+        "end": 14715,
+        "text": "the 9th Circuit",
+        "sentence": "Judge Lawrence VanDyke, who was nominated by Trump to the US Court of Appeals for the 9th Circuit last year, was a Blackstone fellow in 2003."
+      }
+    ]
+  },
+  {
+    "text": "\\\"despair",
+    "normalized": "\\\"despair",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10610,
+        "end": 10619,
+        "text": "\\\"despair",
+        "sentence": "The authors wrote that same-sex relationships led to \\\"despair, disease and early death.\\\" Read more \\\"For many years, the church and Christians were essentially AWOL from the courthouse while dozens of legal cases were litigated, setting precedents the homosexual activists rely on today,\\\" Sears an"
+      }
+    ]
+  },
+  {
+    "text": "\\\"It",
+    "normalized": "\\\"it",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 11779,
+        "end": 11783,
+        "text": "\\\"It",
+        "sentence": "Another that the ADF said remains on the list said the fact \\\"that homosexuals once had to remain in the closet was a sign of sanity in the society.\\\" An introduction to the reading list told fellows, \\\"It is likely that you may not concur with every assertion contained in every reading; neither doe"
+      }
+    ]
+  },
+  {
+    "text": "\\\"Odd Man Out.\\",
+    "normalized": "\\\"odd man out.\\",
+    "label": "WORK_OF_ART",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10297,
+        "end": 10312,
+        "text": "\\\"Odd Man Out.\\",
+        "sentence": "\\\"Just like the Greeks inside the Trojan Horse, the idea seemed to be an attempt to carefully sneak these budding Christian legal warriors into the courts to change the culture through judicial opinion,\\\" Murray, who is gay, wrote in his 2015 book \\\"Odd Man Out.\\\" The ADF did not respond to question"
+      }
+    ]
+  },
+  {
+    "text": "\\\"While",
+    "normalized": "\\\"while",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 14334,
+        "end": 14341,
+        "text": "\\\"While",
+        "sentence": "\\\"While others may differ with these beliefs, it is false, inflammatory, and reprehensible to call this belief hateful or bigoted.\\\" The Blackstone programme counts several judges and successful lawyers as alumni, along with dozens of students who went on to prestigious clerkships."
+      }
+    ]
+  },
+  {
+    "text": "a Court of Appeals",
+    "normalized": "a court of appeals",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 4862,
+        "end": 4880,
+        "text": "a Court of Appeals",
+        "sentence": "Read more In her 2017 confirmation hearing, in response to the suggestion that she might be a \\\"no vote on Roe,\\\" Ms Barrett said: \\\"I'm being considered for a position on a Court of Appeals, and there would be no opportunity to be a no vote on Roe."
+      }
+    ]
+  },
+  {
+    "text": "Al Franken",
+    "normalized": "al franken",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 5572,
+        "end": 5582,
+        "text": "Al Franken",
+        "sentence": "Al Franken, a Democratic senator from Minnesota at the time, asked Ms Barrett in 2017 why she agreed to speak at the ADF's training programme, for a group that he said \\\"fights against equal treatment of LGBT people.\\\" She participated in the program once in Alexandria, Va., and four times in Phoeni"
+      }
+    ]
+  },
+  {
+    "text": "Alan Sears",
+    "normalized": "alan sears",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10529,
+        "end": 10539,
+        "text": "Alan Sears",
+        "sentence": "A suggested reading list for the fellowship, published on Blackstone's site from 2010 to 2015, included \\\"The Homosexual Agenda\\\" by senior ADF staffers Alan Sears and Craig Osten."
+      }
+    ]
+  },
+  {
+    "text": "Alliance Defence Fund",
+    "normalized": "alliance defence fund",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 8643,
+        "end": 8664,
+        "text": "Alliance Defence Fund",
+        "sentence": "The ADF was founded as Alliance Defence Fund in 1993 by leaders of several Christian and conservative organisations as a bulwark against the liberal-leaning American Civil Liberties Union."
+      }
+    ]
+  },
+  {
+    "text": "Allison Jones Rushing",
+    "normalized": "allison jones rushing",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 14981,
+        "end": 15002,
+        "text": "Allison Jones Rushing",
+        "sentence": "Judge Allison Jones Rushing, named to the 4th Circuit Court by Trump last year at age 37, said in documents filed to the Senate that she participated in a \\\"summer program for law students\\\" run by the ADF."
+      }
+    ]
+  },
+  {
+    "text": "American Civil Liberties Union",
+    "normalized": "american civil liberties union",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 8777,
+        "end": 8807,
+        "text": "American Civil Liberties Union",
+        "sentence": "The ADF was founded as Alliance Defence Fund in 1993 by leaders of several Christian and conservative organisations as a bulwark against the liberal-leaning American Civil Liberties Union."
+      }
+    ]
+  },
+  {
+    "text": "Amy Coney Barrett",
+    "normalized": "amy coney barrett",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 6,
+        "end": 23,
+        "text": "Amy Coney Barrett",
+        "sentence": "Judge Amy Coney Barrett, President Donald Trump's nominee to replace Ruth Bader Ginsburg on the Supreme Court, publicly grappled decades ago with the tension Catholic judges can face between their religious values and the law."
+      }
+    ]
+  },
+  {
+    "text": "Antonin Scalia",
+    "normalized": "antonin scalia",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 8538,
+        "end": 8552,
+        "text": "Antonin Scalia",
+        "sentence": "Ms Barrett considers herself an originalist who interprets laws based on the intention of their authors, adhering to the school of thought closely associated with the late Justice Antonin Scalia, for whom Barrett clerked at the Supreme Court from 1998 to 1999."
+      }
+    ]
+  },
+  {
+    "text": "Barrett \\\"clearly",
+    "normalized": "barrett \\\"clearly",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 3474,
+        "end": 3491,
+        "text": "Barrett \\\"clearly",
+        "sentence": "Last week, Hawley who also has served as a Blackstone faculty member - said Barrett \\\"clearly meets that threshold.\\\" As a federal appellate judge, MsBarrett has ruled skeptically about a broad interpretation of abortion rights and has shown a willingness to entertain state restrictions on the proce"
+      }
+    ]
+  },
+  {
+    "text": "Blackstone Legal Fellowship",
+    "normalized": "blackstone legal fellowship",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 9601,
+        "end": 9632,
+        "text": "the Blackstone Legal Fellowship",
+        "sentence": "The group says it fights for religious freedom as well as \\\"the sanctity of human life, freedom of speech, and marriage and family.\\\" The group launched the Blackstone Legal Fellowship programme in 2000 as a \\\"summer-long leadership development program in law and servant ministry\\\" for 24 students, "
+      }
+    ]
+  },
+  {
+    "text": "Casey",
+    "normalized": "casey",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 3968,
+        "end": 3973,
+        "text": "Casey",
+        "sentence": "In the most notable abortion case, MsBarrett joined in a dissent that said the Supreme Court's decision in Planned Parenthood v. Casey, which reinforced the right of a woman to choose abortion before viability, had not considered whether the reason for choosing to terminate a pregnancy might matter."
+      }
+    ]
+  },
+  {
+    "text": "Chandler",
+    "normalized": "chandler",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 13226,
+        "end": 13234,
+        "text": "Chandler",
+        "sentence": "In its 2019 tax filing, the ADF said Blackstone was meant to prepare Christian law students \\\"to adhere to the practice of their faith in the legal profession, an arena often hostile to Christianity.\\\" Read more Tim Chandler, the ADF senior vice president who took over running Blackstone from Ventre"
+      }
+    ]
+  },
+  {
+    "text": "Congress",
+    "normalized": "congress",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 8287,
+        "end": 8295,
+        "text": "Congress",
+        "sentence": "In more recent years, but still before she was named to the appellate court, Ms Barrett publicly avowed that marriage and family are \\\"founded on the indissoluble commitment of a man and a woman.\\\" She also voiced skepticism that Title IX the law that prohibits sex discrimination at schools acceptin"
+      }
+    ]
+  },
+  {
+    "text": "Constitutional Convention",
+    "normalized": "constitutional convention",
+    "label": "EVENT",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10017,
+        "end": 10046,
+        "text": "the Constitutional Convention",
+        "sentence": "Joe Murray, one of the first Blackstone fellows, later recalled in a memoir that teachers told him and his classmates that they were part of a historic event, and predicted that the inaugural class would one day be compared to the Constitutional Convention."
+      }
+    ]
+  },
+  {
+    "text": "Craig Osten",
+    "normalized": "craig osten",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10544,
+        "end": 10555,
+        "text": "Craig Osten",
+        "sentence": "A suggested reading list for the fellowship, published on Blackstone's site from 2010 to 2015, included \\\"The Homosexual Agenda\\\" by senior ADF staffers Alan Sears and Craig Osten."
+      }
+    ]
+  },
+  {
+    "text": "Dianne Feinstein",
+    "normalized": "dianne feinstein",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 5068,
+        "end": 5084,
+        "text": "Dianne Feinstein",
+        "sentence": "And as I said to the [Judiciary] Committee, I would faithfully apply all Supreme Court precedent.\\\" Also in that hearing, Sen. Dianne Feinstein, D-Calif., told Ms Barrett that based on her public statements, Feinstein was uncomfortable with the nomination because \\\"the dogma lives loudly within you."
+      }
+    ]
+  },
+  {
+    "text": "Donald Trump's",
+    "normalized": "donald trump's",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 35,
+        "end": 49,
+        "text": "Donald Trump's",
+        "sentence": "Judge Amy Coney Barrett, President Donald Trump's nominee to replace Ruth Bader Ginsburg on the Supreme Court, publicly grappled decades ago with the tension Catholic judges can face between their religious values and the law."
+      }
+    ]
+  },
+  {
+    "text": "Federalist Society",
+    "normalized": "federalist society",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 12102,
+        "end": 12124,
+        "text": "the Federalist Society",
+        "sentence": "In the years that Ms Barrett spoke to Blackstone fellows, the programme was overseen by the ADF's senior vice president, Jeffery Ventrella, who sits on the Religious Liberties Practice Group Executive Committee of the Federalist Society, the powerful conservative legal group that has helped shape Tr"
+      }
+    ]
+  },
+  {
+    "text": "Florida Supreme Court",
+    "normalized": "florida supreme court",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 14805,
+        "end": 14830,
+        "text": "the Florida Supreme Court",
+        "sentence": "Judge Jamie Grosshans, who was appointed to the Florida Supreme Court this month by Gov. Ron DeSantis, a Republican, also was a Blackstone fellow, according to an archived version of her former law firm's website."
+      }
+    ]
+  },
+  {
+    "text": "Gospel in America\\",
+    "normalized": "gospel in america\\",
+    "label": "WORK_OF_ART",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 993,
+        "end": 1015,
+        "text": "the Gospel in America\\",
+        "sentence": "It was founded to show students \\\"how God can use them as judges, law professors and practicing attorneys to help keep the door open for the spread of the Gospel in America\\\"."
+      }
+    ]
+  },
+  {
+    "text": "Hawley",
+    "normalized": "hawley",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 3409,
+        "end": 3415,
+        "text": "Hawley",
+        "sentence": "Last week, Hawley who also has served as a Blackstone faculty member - said Barrett \\\"clearly meets that threshold.\\\" As a federal appellate judge, MsBarrett has ruled skeptically about a broad interpretation of abortion rights and has shown a willingness to entertain state restrictions on the proce"
+      }
+    ]
+  },
+  {
+    "text": "Internet Archive",
+    "normalized": "internet archive",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 10918,
+        "end": 10938,
+        "text": "the Internet Archive",
+        "sentence": "The authors wrote that same-sex relationships led to \\\"despair, disease and early death.\\\" Read more \\\"For many years, the church and Christians were essentially AWOL from the courthouse while dozens of legal cases were litigated, setting precedents the homosexual activists rely on today,\\\" Sears an"
+      }
+    ]
+  },
+  {
+    "text": "Jamie Grosshans",
+    "normalized": "jamie grosshans",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 14767,
+        "end": 14782,
+        "text": "Jamie Grosshans",
+        "sentence": "Judge Jamie Grosshans, who was appointed to the Florida Supreme Court this month by Gov. Ron DeSantis, a Republican, also was a Blackstone fellow, according to an archived version of her former law firm's website."
+      }
+    ]
+  },
+  {
+    "text": "Jeffery Ventrella",
+    "normalized": "jeffery ventrella",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 12009,
+        "end": 12026,
+        "text": "Jeffery Ventrella",
+        "sentence": "In the years that Ms Barrett spoke to Blackstone fellows, the programme was overseen by the ADF's senior vice president, Jeffery Ventrella, who sits on the Religious Liberties Practice Group Executive Committee of the Federalist Society, the powerful conservative legal group that has helped shape Tr"
+      }
+    ]
+  },
+  {
+    "text": "Jeremy Tedesco",
+    "normalized": "jeremy tedesco",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 13958,
+        "end": 13972,
+        "text": "Jeremy Tedesco",
+        "sentence": "Jeremy Tedesco, the ADF's senior counsel and senior vice president of communications, told The Post that Ms Barrett had been targeted by people trying to smear her for her religious views."
+      }
+    ]
+  }
+]

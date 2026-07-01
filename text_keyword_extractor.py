@@ -1,22 +1,111 @@
+import datetime
 import json
 import re
 from collections import OrderedDict, Counter
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 
 import numpy as np
 from spacy.lang.en.stop_words import STOP_WORDS
 
+# Stamped onto enrichment output so downstream consumers can tell which extractor
+# version produced a row. Bump when the output schema or scoring changes.
+ENRICHMENT_VERSION = "poc-1"
+
+_WHITESPACE_RE = re.compile(r"\s+")
+_LEADING_THE_RE = re.compile(r"^the\s+", flags=re.IGNORECASE)
+
 
 @dataclass
 class ExtractorConfig:
-    """Tunable parameters for tag extraction, passed to TagsExtractor."""
+    """Tunable parameters for TagsExtractor, grouped by which output they affect.
+
+    The two outputs are independent and so are most of their settings:
+      - keywords: the TextRank keyphrase path.
+      - entities: the spaCy NER path.
+    The one shared setting is entity_label_weights (see below).
+    """
+
+    # --- keywords (keyphrase path) only ---
     exclude_pos: list = field(default_factory=lambda: ["PUNCT", "PART"])
+    multiple_occurrence_multiplier: bool = True
+    full_term_weight_bonus: dict = field(default_factory=lambda: {"PERSON": 2})
+
+    # --- shared by both paths ---
+    # Per-label importance. In the keyphrase path it weights multi-word entities during
+    # merging; in the entity path it is the entity's label_weight (score = weight * count).
     entity_label_weights: dict = field(default_factory=lambda: {
         "PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5,
         "WORK_OF_ART": 5, "DATE": 0,
     })
-    multiple_occurrence_multiplier: bool = True
-    full_term_weight_bonus: dict = field(default_factory=lambda: {"PERSON": 2})
+
+    # --- entities path only ---
+    # Which entities to keep: label must be in include_labels (empty = keep any) and
+    # not in exclude_labels.
+    include_labels: list = field(default_factory=lambda: [
+        "PERSON", "ORG", "NORP", "GPE", "EVENT", "PRODUCT", "WORK_OF_ART", "FAC", "LOC",
+    ])
+    exclude_labels: list = field(default_factory=lambda: [
+        "DATE", "TIME", "CARDINAL", "ORDINAL", "QUANTITY", "MONEY", "PERCENT",
+    ])
+    remove_leading_the: bool = True
+    max_mentions_per_entity: int = 3
+    max_sentence_chars: int = 300
+    max_entities: int = 50
+
+
+@dataclass
+class Evidence:
+    field: str
+    start: int
+    end: int
+    text: str
+    sentence: str | None = None
+    approximate: bool = False
+
+
+@dataclass
+class Keyword:
+    text: str
+    normalized: str
+    type: str = "keyphrase"
+    score: float = 0.0
+    # TODO: placeholder, always 1. The keyphrase scoring folds occurrence into the score
+    # and keeps no separate count; populate with real occurrence counts when added.
+    count: int = 1
+    source_fields: list = field(default_factory=lambda: ["content"])
+    evidence: list = field(default_factory=list)
+
+
+@dataclass
+class EntityMention:
+    field: str
+    start: int
+    end: int
+    text: str
+    sentence: str | None = None
+
+
+@dataclass
+class Entity:
+    text: str
+    normalized: str
+    label: str
+    score: float
+    count: int
+    label_weight: float
+    is_multi_word: bool
+    first_seen_field: str = "content"
+    source_fields: list = field(default_factory=lambda: ["content"])
+    mentions: list = field(default_factory=list)
+
+
+@dataclass
+class ArticleEnrichmentResult:
+    keywords: list = field(default_factory=list)
+    entities: list = field(default_factory=list)
+    enrichment_version: str = ENRICHMENT_VERSION
+    enrichment_processed_at: str = ""
+    enrichment_error: str | None = None
 
 
 class TextRank4Keyword():
@@ -145,6 +234,8 @@ class TagsExtractor():
         self.config = config or ExtractorConfig()
         self.remove_ambiguity = True
         self.tags = OrderedDict()
+        # Parsed Doc from the last extract() call, reused by extract_features().
+        self.doc = None
         # Per-instance copy so extract() can merge request labels without mutating the config.
         self.entity_label_weights = self.config.entity_label_weights.copy()
 
@@ -156,7 +247,103 @@ class TagsExtractor():
 
         tr4w = TextRank4Keyword(self.nlp)
         tr4w.analyze(text, labels, candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+        self.doc = tr4w.doc
         return self.get_tags(tr4w.doc, tr4w.node_weight, num)
+
+    def extract_features(self, text, labels, num=20):
+        """Return keywords and entities as an ``ArticleEnrichmentResult``.
+
+        ``keywords`` holds the ranked keyphrases produced by ``extract()``; ``entities``
+        holds spaCy entity mentions grouped by normalized text and label (read from the
+        Doc that ``extract()`` just parsed). Any failure is recorded in
+        ``enrichment_error`` instead of raised, so a single bad article never aborts a
+        batch run.
+        """
+        result = ArticleEnrichmentResult(
+            enrichment_version=ENRICHMENT_VERSION,
+            enrichment_processed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        )
+        try:
+            tags = self.extract(text, labels, num)
+            result.keywords = [
+                Keyword(text=term, normalized=self._normalize_text(term), score=float(score))
+                for term, score in tags.items()
+            ]
+            result.entities = self._extract_entities(self.doc)
+        except Exception as exc:
+            result.enrichment_error = str(exc)
+        return result
+
+    def _normalize_text(self, text):
+        """Lowercased, whitespace-collapsed form used for indexing/filtering."""
+        return _WHITESPACE_RE.sub(" ", text).strip().lower()
+
+    def _clean_surface(self, text):
+        """Readable surface form: collapse whitespace, optionally drop a leading 'the'."""
+        cleaned = _WHITESPACE_RE.sub(" ", text).strip()
+        if self.config.remove_leading_the:
+            cleaned = _LEADING_THE_RE.sub("", cleaned)
+        return cleaned
+
+    def _extract_entities(self, doc, field_name="content"):
+        """Group the entities in an already-parsed ``Doc`` into Entity objects.
+
+        Mentions are grouped by ``(normalized, label)`` and filtered/weighted by config.
+        Works off the existing ``Doc`` (no reparsing) and reads mention offsets straight
+        from each ``Span``.
+        """
+        include = set(self.config.include_labels)
+        exclude = set(self.config.exclude_labels)
+        groups = OrderedDict()
+
+        for ent in doc.ents:
+            label = ent.label_
+            if label in exclude:
+                continue
+            if include and label not in include:
+                continue
+            surface = self._clean_surface(ent.text)
+            if not surface:
+                continue
+            normalized = surface.lower()
+            key = (normalized, label)
+
+            group = groups.get(key)
+            if group is None:
+                group = {"text": surface, "normalized": normalized, "label": label,
+                         "count": 0, "mentions": []}
+                groups[key] = group
+            group["count"] += 1
+
+            if len(group["mentions"]) < self.config.max_mentions_per_entity:
+                sentence = _WHITESPACE_RE.sub(" ", ent.sent.text).strip() if ent.sent is not None else ""
+                sentence = sentence[: self.config.max_sentence_chars]
+                group["mentions"].append(EntityMention(
+                    field=field_name,
+                    start=ent.start_char,
+                    end=ent.end_char,
+                    text=ent.text,
+                    sentence=sentence or None,
+                ))
+
+        entities = []
+        for group in groups.values():
+            label_weight = float(self.entity_label_weights.get(group["label"], 1.0))
+            entities.append(Entity(
+                text=group["text"],
+                normalized=group["normalized"],
+                label=group["label"],
+                score=label_weight * group["count"],
+                count=group["count"],
+                label_weight=label_weight,
+                is_multi_word=(" " in group["normalized"]),
+                first_seen_field=field_name,
+                source_fields=[field_name],
+                mentions=group["mentions"],
+            ))
+        # Stable, deterministic ordering: score desc, then normalized/label for ties.
+        entities.sort(key=lambda e: (-e.score, e.normalized, e.label))
+        return entities[: self.config.max_entities]
 
     def normalize_entity(self, ent):
         return re.sub(r'^the\s+', "", ent, flags=re.IGNORECASE)
@@ -295,6 +482,54 @@ class TagsExtractor():
 
     def to_json(self):
         return json.dumps(self.tags)
+
+
+def keywords_to_json(result):
+    return json.dumps([asdict(keyword) for keyword in result.keywords], ensure_ascii=False)
+
+
+def entities_to_json(result):
+    return json.dumps([asdict(entity) for entity in result.entities], ensure_ascii=False)
+
+
+def to_enrichment_dict(result):
+    """Full result as one nested, JSON-serializable dict — handy for debugging.
+
+    Keeps the objects nested (unlike to_enrichment_columns, which returns JSON strings),
+    so ``json.dumps(to_enrichment_dict(result), indent=2, ensure_ascii=False)`` gives a
+    single readable, paste-ready document.
+    """
+    return {
+        "keywords": [asdict(keyword) for keyword in result.keywords],
+        "entities": [asdict(entity) for entity in result.entities],
+        "enrichment_version": result.enrichment_version,
+        "enrichment_processed_at": result.enrichment_processed_at,
+        "enrichment_error": result.enrichment_error,
+    }
+
+
+def to_enrichment_columns(result):
+    """Flatten a result into JSON-string columns for storage and search indexing.
+
+    Each value is a JSON string: the ``*_json`` fields carry the full nested objects,
+    while the flat text/label/pair arrays support simple keyword filters and aggregations.
+    """
+    return {
+        "keywords_json": keywords_to_json(result),
+        "entities_json": entities_to_json(result),
+        "keyword_texts_json": json.dumps(
+            [keyword.normalized for keyword in result.keywords], ensure_ascii=False),
+        "entity_texts_json": json.dumps(
+            [entity.normalized for entity in result.entities], ensure_ascii=False),
+        "entity_labels_json": json.dumps(
+            sorted({entity.label for entity in result.entities}), ensure_ascii=False),
+        "entity_pairs_json": json.dumps(
+            [f"{entity.label}:{entity.normalized}" for entity in result.entities],
+            ensure_ascii=False),
+        "enrichment_version": result.enrichment_version,
+        "enrichment_processed_at": result.enrichment_processed_at,
+        "enrichment_error": result.enrichment_error,
+    }
 
 
 class FullTerm:

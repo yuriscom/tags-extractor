@@ -1,0 +1,638 @@
+[
+  {
+    "text": "Biden",
+    "normalized": "biden",
+    "label": "PERSON",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 350,
+        "end": 355,
+        "text": "Biden",
+        "sentence": "'I mean, his choice of words weren't very good when he, you know, dismissed the allegation,' Trump said of Biden during an interview with The Post in the Oval Office."
+      },
+      {
+        "field": "content",
+        "start": 478,
+        "end": 483,
+        "text": "Biden",
+        "sentence": "Biden, the presumptive Democratic presidential nominee, flatly denied former aide Tara Reade's claim during a Friday interview with 'Morning Joe' on MSNBC, saying the alleged 1993 assault 'never happened,' while also refusing to open his Senate records held by the University of Delaware, citing past"
+      },
+      {
+        "field": "content",
+        "start": 871,
+        "end": 876,
+        "text": "Biden",
+        "sentence": "Trump did not specify what part of Biden's denial he found fault with, but said he believes that Republicans face far harsher scrutiny when accused of sexual misconduct."
+      }
+    ]
+  },
+  {
+    "text": "Trump",
+    "normalized": "trump",
+    "label": "ORG",
+    "score": 15.0,
+    "count": 3,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 336,
+        "end": 341,
+        "text": "Trump",
+        "sentence": "'I mean, his choice of words weren't very good when he, you know, dismissed the allegation,' Trump said of Biden during an interview with The Post in the Oval Office."
+      },
+      {
+        "field": "content",
+        "start": 1229,
+        "end": 1234,
+        "text": "Trump",
+        "sentence": "He's a fine man with a fine family,' Trump said 'And there's never been a human being in the history of Congress that was treated worse than him.'"
+      },
+      {
+        "field": "content",
+        "start": 1632,
+        "end": 1637,
+        "text": "Trump",
+        "sentence": "And now in the meantime three of the women have recanted,' Trump said."
+      }
+    ]
+  },
+  {
+    "text": "Senate",
+    "normalized": "senate",
+    "label": "ORG",
+    "score": 10.0,
+    "count": 2,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 121,
+        "end": 127,
+        "text": "Senate",
+        "sentence": "WASHINGTON - President Trump on Monday ripped Joe Biden's denial of a decades-old sexual assault allegation by a former Senate staffer - and said that Republicans get treated far more harshly than Democrats when accused of sexual misconduct."
+      },
+      {
+        "field": "content",
+        "start": 716,
+        "end": 722,
+        "text": "Senate",
+        "sentence": "Biden, the presumptive Democratic presidential nominee, flatly denied former aide Tara Reade's claim during a Friday interview with 'Morning Joe' on MSNBC, saying the alleged 1993 assault 'never happened,' while also refusing to open his Senate records held by the University of Delaware, citing past"
+      }
+    ]
+  },
+  {
+    "text": "Republicans",
+    "normalized": "republicans",
+    "label": "NORP",
+    "score": 6.0,
+    "count": 2,
+    "label_weight": 3.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 152,
+        "end": 163,
+        "text": "Republicans",
+        "sentence": "WASHINGTON - President Trump on Monday ripped Joe Biden's denial of a decades-old sexual assault allegation by a former Senate staffer - and said that Republicans get treated far more harshly than Democrats when accused of sexual misconduct."
+      },
+      {
+        "field": "content",
+        "start": 933,
+        "end": 944,
+        "text": "Republicans",
+        "sentence": "Trump did not specify what part of Biden's denial he found fault with, but said he believes that Republicans face far harsher scrutiny when accused of sexual misconduct."
+      }
+    ]
+  },
+  {
+    "text": "Blasey Ford",
+    "normalized": "blasey ford",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1706,
+        "end": 1717,
+        "text": "Blasey Ford",
+        "sentence": "And the other one I don't believe her for a moment, which is Blasey Ford."
+      }
+    ]
+  },
+  {
+    "text": "Bongino",
+    "normalized": "bongino",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2303,
+        "end": 2310,
+        "text": "Bongino",
+        "sentence": "But Trump told Bongino, 'I watched Tara and she seems very credible.'"
+      }
+    ]
+  },
+  {
+    "text": "Brett Kavanaugh '",
+    "normalized": "brett kavanaugh '",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1067,
+        "end": 1084,
+        "text": "Brett Kavanaugh '",
+        "sentence": "During his 2018 confirmation hearings, Supreme Court Justice Brett Kavanaugh 'was treated more unfairly than any human being I've ever seen."
+      }
+    ]
+  },
+  {
+    "text": "Christine Blasey Ford",
+    "normalized": "christine blasey ford",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1461,
+        "end": 1482,
+        "text": "Christine Blasey Ford",
+        "sentence": "Kavanaugh faced misconduct allegations dating to his teen and college years from Stanford University psychology professor Christine Blasey Ford, Yale University classmate Deborah Ramirez and other women, some of whom later recanted."
+      }
+    ]
+  },
+  {
+    "text": "Congress",
+    "normalized": "congress",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1296,
+        "end": 1304,
+        "text": "Congress",
+        "sentence": "He's a fine man with a fine family,' Trump said 'And there's never been a human being in the history of Congress that was treated worse than him.'"
+      }
+    ]
+  },
+  {
+    "text": "Dan Bongino",
+    "normalized": "dan bongino",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2159,
+        "end": 2170,
+        "text": "Dan Bongino",
+        "sentence": "On Friday, Trump weighed in on Reade's claims during a radio interview with conservative pundit Dan Bongino, saying that he had personally faced 'nonsense false accusations' from women accusing him of misconduct and assault."
+      }
+    ]
+  },
+  {
+    "text": "Deborah Ramirez",
+    "normalized": "deborah ramirez",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1510,
+        "end": 1525,
+        "text": "Deborah Ramirez",
+        "sentence": "Kavanaugh faced misconduct allegations dating to his teen and college years from Stanford University psychology professor Christine Blasey Ford, Yale University classmate Deborah Ramirez and other women, some of whom later recanted."
+      }
+    ]
+  },
+  {
+    "text": "Joe Biden",
+    "normalized": "joe biden",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 47,
+        "end": 56,
+        "text": "Joe Biden",
+        "sentence": "WASHINGTON - President Trump on Monday ripped Joe Biden's denial of a decades-old sexual assault allegation by a former Senate staffer - and said that Republicans get treated far more harshly than Democrats when accused of sexual misconduct."
+      }
+    ]
+  },
+  {
+    "text": "Justice Kavanaugh",
+    "normalized": "justice kavanaugh",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2043,
+        "end": 2060,
+        "text": "Justice Kavanaugh",
+        "sentence": "And there's ever been a human being who has been treated more unfairly [than] a very fine man named Justice Kavanaugh.'"
+      }
+    ]
+  },
+  {
+    "text": "Kavanaugh",
+    "normalized": "kavanaugh",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1339,
+        "end": 1348,
+        "text": "Kavanaugh",
+        "sentence": "Kavanaugh faced misconduct allegations dating to his teen and college years from Stanford University psychology professor Christine Blasey Ford, Yale University classmate Deborah Ramirez and other women, some of whom later recanted."
+      }
+    ]
+  },
+  {
+    "text": "MSNBC",
+    "normalized": "msnbc",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 627,
+        "end": 632,
+        "text": "MSNBC",
+        "sentence": "Biden, the presumptive Democratic presidential nominee, flatly denied former aide Tara Reade's claim during a Friday interview with 'Morning Joe' on MSNBC, saying the alleged 1993 assault 'never happened,' while also refusing to open his Senate records held by the University of Delaware, citing past"
+      }
+    ]
+  },
+  {
+    "text": "Post",
+    "normalized": "post",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 381,
+        "end": 389,
+        "text": "The Post",
+        "sentence": "'I mean, his choice of words weren't very good when he, you know, dismissed the allegation,' Trump said of Biden during an interview with The Post in the Oval Office."
+      }
+    ]
+  },
+  {
+    "text": "Reade",
+    "normalized": "reade",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2094,
+        "end": 2099,
+        "text": "Reade",
+        "sentence": "On Friday, Trump weighed in on Reade's claims during a radio interview with conservative pundit Dan Bongino, saying that he had personally faced 'nonsense false accusations' from women accusing him of misconduct and assault."
+      }
+    ]
+  },
+  {
+    "text": "Stanford University",
+    "normalized": "stanford university",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1420,
+        "end": 1439,
+        "text": "Stanford University",
+        "sentence": "Kavanaugh faced misconduct allegations dating to his teen and college years from Stanford University psychology professor Christine Blasey Ford, Yale University classmate Deborah Ramirez and other women, some of whom later recanted."
+      }
+    ]
+  },
+  {
+    "text": "Supreme Court",
+    "normalized": "supreme court",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1045,
+        "end": 1058,
+        "text": "Supreme Court",
+        "sentence": "During his 2018 confirmation hearings, Supreme Court Justice Brett Kavanaugh 'was treated more unfairly than any human being I've ever seen."
+      }
+    ]
+  },
+  {
+    "text": "Tara",
+    "normalized": "tara",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 2323,
+        "end": 2327,
+        "text": "Tara",
+        "sentence": "But Trump told Bongino, 'I watched Tara and she seems very credible.'"
+      }
+    ]
+  },
+  {
+    "text": "Tara Reade",
+    "normalized": "tara reade",
+    "label": "PERSON",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 560,
+        "end": 570,
+        "text": "Tara Reade",
+        "sentence": "Biden, the presumptive Democratic presidential nominee, flatly denied former aide Tara Reade's claim during a Friday interview with 'Morning Joe' on MSNBC, saying the alleged 1993 assault 'never happened,' while also refusing to open his Senate records held by the University of Delaware, citing past"
+      }
+    ]
+  },
+  {
+    "text": "University of Delaware",
+    "normalized": "university of delaware",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 739,
+        "end": 765,
+        "text": "the University of Delaware",
+        "sentence": "Biden, the presumptive Democratic presidential nominee, flatly denied former aide Tara Reade's claim during a Friday interview with 'Morning Joe' on MSNBC, saying the alleged 1993 assault 'never happened,' while also refusing to open his Senate records held by the University of Delaware, citing past"
+      }
+    ]
+  },
+  {
+    "text": "Yale University",
+    "normalized": "yale university",
+    "label": "ORG",
+    "score": 5.0,
+    "count": 1,
+    "label_weight": 5.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1484,
+        "end": 1499,
+        "text": "Yale University",
+        "sentence": "Kavanaugh faced misconduct allegations dating to his teen and college years from Stanford University psychology professor Christine Blasey Ford, Yale University classmate Deborah Ramirez and other women, some of whom later recanted."
+      }
+    ]
+  },
+  {
+    "text": "Democratic",
+    "normalized": "democratic",
+    "label": "NORP",
+    "score": 3.0,
+    "count": 1,
+    "label_weight": 3.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 501,
+        "end": 511,
+        "text": "Democratic",
+        "sentence": "Biden, the presumptive Democratic presidential nominee, flatly denied former aide Tara Reade's claim during a Friday interview with 'Morning Joe' on MSNBC, saying the alleged 1993 assault 'never happened,' while also refusing to open his Senate records held by the University of Delaware, citing past"
+      }
+    ]
+  },
+  {
+    "text": "Democrats",
+    "normalized": "democrats",
+    "label": "NORP",
+    "score": 3.0,
+    "count": 1,
+    "label_weight": 3.0,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 198,
+        "end": 207,
+        "text": "Democrats",
+        "sentence": "WASHINGTON - President Trump on Monday ripped Joe Biden's denial of a decades-old sexual assault allegation by a former Senate staffer - and said that Republicans get treated far more harshly than Democrats when accused of sexual misconduct."
+      }
+    ]
+  },
+  {
+    "text": "WASHINGTON",
+    "normalized": "washington",
+    "label": "GPE",
+    "score": 1.5,
+    "count": 1,
+    "label_weight": 1.5,
+    "is_multi_word": false,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 1,
+        "end": 11,
+        "text": "WASHINGTON",
+        "sentence": "WASHINGTON - President Trump on Monday ripped Joe Biden's denial of a decades-old sexual assault allegation by a former Senate staffer - and said that Republicans get treated far more harshly than Democrats when accused of sexual misconduct."
+      }
+    ]
+  },
+  {
+    "text": "Oval Office",
+    "normalized": "oval office",
+    "label": "FAC",
+    "score": 1.0,
+    "count": 1,
+    "label_weight": 1.0,
+    "is_multi_word": true,
+    "first_seen_field": "content",
+    "source_fields": [
+      "content"
+    ],
+    "mentions": [
+      {
+        "field": "content",
+        "start": 393,
+        "end": 408,
+        "text": "the Oval Office",
+        "sentence": "'I mean, his choice of words weren't very good when he, you know, dismissed the allegation,' Trump said of Biden during an interview with The Post in the Oval Office."
+      }
+    ]
+  }
+]

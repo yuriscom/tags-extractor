@@ -1,0 +1,222 @@
+[
+  {
+    "text": "Joe Biden",
+    "normalized": "joe biden",
+    "type": "keyphrase",
+    "score": 64.16779490779564,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Tara Reade",
+    "normalized": "tara reade",
+    "type": "keyphrase",
+    "score": 56.16527670769186,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Deborah Ramirez",
+    "normalized": "deborah ramirez",
+    "type": "keyphrase",
+    "score": 23.558988328525665,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Dan Bongino",
+    "normalized": "dan bongino",
+    "type": "keyphrase",
+    "score": 20.64099962073673,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Supreme Court",
+    "normalized": "supreme court",
+    "type": "keyphrase",
+    "score": 16.417313102816358,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Brett Kavanaugh",
+    "normalized": "brett kavanaugh",
+    "type": "keyphrase",
+    "score": 10.696527777777778,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Christine Blasey Ford",
+    "normalized": "christine blasey ford",
+    "type": "keyphrase",
+    "score": 10.523347505668934,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Justice Kavanaugh",
+    "normalized": "justice kavanaugh",
+    "type": "keyphrase",
+    "score": 5.431249999999999,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Yale University",
+    "normalized": "yale university",
+    "type": "keyphrase",
+    "score": 5.261673752834467,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Senate",
+    "normalized": "senate",
+    "type": "keyphrase",
+    "score": 5.20706981292517,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Stanford University",
+    "normalized": "stanford university",
+    "type": "keyphrase",
+    "score": 3.7918820861677998,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "University of Delaware",
+    "normalized": "university of delaware",
+    "type": "keyphrase",
+    "score": 3.074711451247165,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Republicans",
+    "normalized": "republicans",
+    "type": "keyphrase",
+    "score": 2.537554464285714,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "University",
+    "normalized": "university",
+    "type": "keyphrase",
+    "score": 2.235845068027211,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Kavanaugh",
+    "normalized": "kavanaugh",
+    "type": "keyphrase",
+    "score": 1.2479166666666668,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "MSNBC",
+    "normalized": "msnbc",
+    "type": "keyphrase",
+    "score": 1.1221754535147395,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Blasey",
+    "normalized": "blasey",
+    "type": "keyphrase",
+    "score": 1.0830821995464852,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Ford",
+    "normalized": "ford",
+    "type": "keyphrase",
+    "score": 1.0830821995464852,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "Post",
+    "normalized": "post",
+    "type": "keyphrase",
+    "score": 0.7791214285714285,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  },
+  {
+    "text": "WASHINGTON",
+    "normalized": "washington",
+    "type": "keyphrase",
+    "score": 0.6949764880952379,
+    "count": 1,
+    "source_fields": [
+      "content"
+    ],
+    "evidence": []
+  }
+]

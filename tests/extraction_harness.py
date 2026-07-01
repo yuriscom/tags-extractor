@@ -21,6 +21,8 @@ os.environ.setdefault(
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from dataclasses import asdict  # noqa: E402
+
 from spacy_wrapper import SpacyWrapper  # noqa: E402
 from text_keyword_extractor import TagsExtractor  # noqa: E402
 from htmlparser import MLStripper  # noqa: E402
@@ -61,7 +63,7 @@ def load_nlp():
 
 
 def extract_for_file(nlp, filename):
-    """Run the full live pipeline for one input file and return an ordered dict."""
+    """Run the legacy pipeline for one input file and return an ordered dict."""
     text = (FIXTURES_DIR / filename).read_text(encoding="utf-8")
     stripped = _strip_html(_sanitize(text))
     extractor = TagsExtractor(nlp)
@@ -69,5 +71,30 @@ def extract_for_file(nlp, filename):
     return dict(tags)
 
 
+def features_for_file(nlp, filename):
+    """Run the structured pipeline and return an ArticleEnrichmentResult."""
+    text = (FIXTURES_DIR / filename).read_text(encoding="utf-8")
+    stripped = _strip_html(_sanitize(text))
+    extractor = TagsExtractor(nlp)
+    return extractor.extract_features(stripped, LABELS, NUM)
+
+
+def keywords_golden(result):
+    """Deterministic keywords payload (drops nothing; scores compared w/ tolerance)."""
+    return [asdict(keyword) for keyword in result.keywords]
+
+
+def entities_golden(result):
+    return [asdict(entity) for entity in result.entities]
+
+
 def golden_path(filename):
     return GOLDEN_DIR / f"{filename}.json"
+
+
+def keywords_golden_path(filename):
+    return GOLDEN_DIR / f"{filename}.keywords.json"
+
+
+def entities_golden_path(filename):
+    return GOLDEN_DIR / f"{filename}.entities.json"
