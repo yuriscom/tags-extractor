@@ -25,7 +25,9 @@ from spacy_wrapper import SpacyWrapper  # noqa: E402
 from text_keyword_extractor import TagsExtractor  # noqa: E402
 from htmlparser import MLStripper  # noqa: E402
 
-DATA_DIR = REPO_ROOT / "data"
+# Golden inputs live under tests/ (not data/) so they stay frozen and aren't edited
+# by mistake during debugging.
+FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
 GOLDEN_DIR = Path(__file__).resolve().parent / "golden"
 
 # Fixed inputs and parameters used to pin behavior. These match the defaults in
@@ -60,7 +62,7 @@ def load_nlp():
 
 def extract_for_file(nlp, filename):
     """Run the full live pipeline for one input file and return an ordered dict."""
-    text = (DATA_DIR / filename).read_text(encoding="utf-8")
+    text = (FIXTURES_DIR / filename).read_text(encoding="utf-8")
     stripped = _strip_html(_sanitize(text))
     extractor = TagsExtractor(nlp)
     tags = extractor.extract(stripped, LABELS, NUM)

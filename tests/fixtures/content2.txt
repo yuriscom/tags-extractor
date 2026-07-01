@@ -1,0 +1,11 @@
+Apple Inc. announced a major partnership with OpenAI on Tuesday, bringing ChatGPT directly into Siri and other Apple products. Tim Cook, Apple's CEO, described the deal as a significant step toward making artificial intelligence more personal and accessible to everyday users.
+
+The agreement, revealed at Apple's Worldwide Developers Conference in Cupertino, California, will allow iPhone and Mac users to invoke ChatGPT through Siri without switching apps. Sam Altman, the CEO of OpenAI, attended the event and called the collaboration a milestone for both companies.
+
+Google, which has its own Gemini AI assistant, was not immediately available for comment. Analysts at Morgan Stanley suggested the partnership could give Apple a competitive edge over Samsung and other Android device makers in the AI assistant market.
+
+The announcement sent Apple stock up 7% on the Nasdaq. Microsoft, which has invested heavily in OpenAI, saw a smaller gain of 2%. Meta, still developing its own AI products, did not comment publicly on the deal.
+
+Privacy advocates raised concerns about the integration, noting that user queries routed to OpenAI's servers would leave Apple's privacy-focused ecosystem. Apple stated that requests to ChatGPT would not be logged unless users explicitly opted in.
+
+The European Union's digital regulators said they would review the arrangement under the Digital Markets Act. The UK's Competition and Markets Authority also indicated it would monitor the deal closely.

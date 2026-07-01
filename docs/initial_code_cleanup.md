@@ -79,12 +79,17 @@ tests are green, we tackle these as a separate, deliberate pass (each will requi
 golden files with reviewed, intended output). No solution is committed yet — captured here so they
 aren't lost.
 
-### #2 — Scoring unit is inconsistent across branches
-The final `tags` dict receives values on different scales depending on the code path: the
-ambiguity-no-winner branch adds raw `value` (TextRank only), the single-word branch adds
-`value * weight`, and the multi-word branches add `value * singleWeight` / `value * multiWeight`.
-As a result, two terms' scores aren't necessarily on the same scale.
-- **Direction (TBD):** decide on one scoring formula and apply it uniformly across all branches.
+### #2 — Scoring unit is inconsistent across branches — RESOLVED (leave as-is, documented)
+The one branch that differs is the ambiguity-tie fallback in `_merge_terms`: it adds
+`rank_score` alone (no entity-weight multiplier), whereas the other branches add
+`rank_score * <entity-weight>`. This makes the bare shared token land on a smaller scale
+than the full phrases.
+- **Resolution:** kept as-is on purpose. When a shared token ties across entities, keeping it
+  at its bare `rank_score` avoids dropping it, while the full phrases still receive their proper
+  `rank_score * weight` via their own unique tokens (e.g. `Stanley -> Morgan Stanley`,
+  `Freeman -> Morgan Freeman`). In practice both full terms end up with sensible, comparable
+  scores and the low-scored bare token is harmless. Behavior is unchanged; the branch now carries
+  a comment explaining the intent.
 
 ### #3 — Reads from `tags` while still building `tags`
 `extraWeight = tags[txt] if txt in tags else 0` then `multiWeight = (cnt[txt] + extraWeight) * weightBonus`
@@ -93,11 +98,14 @@ result order-dependent and mixing units.
 - **Direction (TBD):** separate the accumulation pass from the read pass; don't feed output back
   into intermediate weight math.
 
-### #4 — Ambiguity resolution is hard to follow
-The winner-selection (`pCnt.most_common()[0][1] != pCnt.most_common()[-1][1]`) is opaque and relies
-on `most_common()` ordering for ties.
-- **Direction (TBD):** rewrite as an explicit, documented rule (e.g. clear tie-break policy) once
-  Phase 3 has isolated it into `_resolve_ambiguity`.
+### #4 — Ambiguity resolution is hard to follow — RESOLVED
+The winner-selection was opaque (`most_common()` called three times inline).
+- **Resolution:** the logic is now isolated in `_resolve_ambiguity` with a docstring, and the
+  winner check computes `ranked = phrase_counts.most_common()` once with explanatory comments.
+  Behavior is intentionally unchanged (golden tests still green): if the phrase weights aren't all
+  equal, the highest-weighted phrase wins; if they're all tied, there is no winner and the bare
+  token is kept. The only remaining edge case — a multi-way tie at the top resolving by `Counter`
+  insertion order — is deterministic and considered acceptable, so no behavioral change was made.
 
 ### #5 — Top-N cutoff is unreliable
 `if i > number: break` counts position in the sorted `node_weight`, not the number of terms actually

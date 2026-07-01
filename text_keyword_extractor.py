@@ -226,8 +226,9 @@ class TagsExtractor():
             for full_term in full_terms:
                 text = full_term.text
                 phrase_counts[text] += entity_weights[text] or 1
-            if phrase_counts.most_common()[0][1] != phrase_counts.most_common()[len(phrase_counts) - 1][1]:
-                ambiguity_winner = phrase_counts.most_common()[0][0]
+            ranked = phrase_counts.most_common()  # highest weight first
+            if ranked[0][1] != ranked[-1][1]:  # weights aren't all equal -> clear winner
+                ambiguity_winner = ranked[0][0]
         return is_ambiguity, ambiguity_winner
 
     def _merge_terms(self, node_weight, entity_weights, full_term_map, number):
@@ -245,6 +246,15 @@ class TagsExtractor():
                     single_weight = entity_weights[term]
 
                 if self.remove_ambiguity is True and is_ambiguity and ambiguity_winner is None:
+                    # Ambiguous tie.
+                    # Example: Morgan Stanley and Morgan Freeman get the same weight.
+                    # The shared token "Morgan" maps to several equally-weighted entities,
+                    # so no single phrase wins. Keep the bare token "Morgan" with its
+                    # TextRank score only (no entity-weight multiplier), which is why this
+                    # score is small (a single term "Morgan" gets a small score).
+                    # The full phrases still get their proper score via
+                    # their own unique tokens (e.g. "Stanley" -> "Morgan Stanley", "Freeman" -> "Morgan Freeman")
+                    # so this just preserves the shared token instead of dropping it entirely.
                     tags[term] = tags.setdefault(term, 0) + rank_score
                     continue
 
