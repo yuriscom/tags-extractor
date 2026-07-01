@@ -155,6 +155,19 @@ class TagsExtractor():
         return re.sub(r'^the\s+', "", ent, flags=re.IGNORECASE)
 
     def get_tags(self, doc, node_weight, number=20):
+        entity_weights, full_term_map = self._build_entity_weights(doc)
+        tags = self._merge_terms(node_weight, entity_weights, full_term_map, number)
+        self.tags = OrderedDict(sorted(tags.items(), key=lambda t: t[1], reverse=True))
+        return self.tags
+
+    def _build_entity_weights(self, doc):
+        """Walk the spaCy entities and accumulate per-entity weights.
+
+        Returns:
+            entity_weights: Counter of normalized entity text -> accumulated weight.
+            full_term_map: dict of lemma -> set(FullTerm) for multi-word entities,
+                used later to promote single tokens to their full phrase.
+        """
         entity_weights = Counter()
         occurrence = Counter()
         full_term_map = dict()
@@ -189,22 +202,36 @@ class TagsExtractor():
 
             entity_weights[text] += weight
 
+        return entity_weights, full_term_map
+
+    def _resolve_ambiguity(self, full_terms, entity_weights):
+        """Pick the winning full phrase when a lemma maps to several of them.
+
+        Returns (is_ambiguity, ambiguity_winner). ambiguity_winner is None when the
+        phrases are tied (no clear winner) or when ambiguity resolution is disabled.
+        """
+        is_ambiguity = False
+        ambiguity_winner = None
+        if len(full_terms) > 1 and self.remove_ambiguity is True:
+            is_ambiguity = True
+            phrase_counts = Counter()
+
+            for full_term in full_terms:
+                text = full_term.text
+                phrase_counts[text] += entity_weights[text] or 1
+            if phrase_counts.most_common()[0][1] != phrase_counts.most_common()[len(phrase_counts) - 1][1]:
+                ambiguity_winner = phrase_counts.most_common()[0][0]
+        return is_ambiguity, ambiguity_winner
+
+    def _merge_terms(self, node_weight, entity_weights, full_term_map, number):
+        """Combine TextRank scores with entity weights, promoting single tokens to
+        their multi-word entity phrase where that scores higher."""
         tags = dict()
         node_weight = OrderedDict(sorted(node_weight.items(), key=lambda t: t[1], reverse=True))
         for i, (term, rank_score) in enumerate(node_weight.items()):
             # we are only interested in replacing the ones that have multi worded version
             if term in full_term_map:
-                is_ambiguity = False
-                ambiguity_winner = None
-                if len(full_term_map[term]) > 1 and self.remove_ambiguity is True:
-                    is_ambiguity = True
-                    phrase_counts = Counter()
-
-                    for full_term in full_term_map[term]:
-                        text = full_term.text
-                        phrase_counts[text] += entity_weights[text] or 1
-                    if phrase_counts.most_common()[0][1] != phrase_counts.most_common()[len(phrase_counts) - 1][1]:
-                        ambiguity_winner = phrase_counts.most_common()[0][0]
+                is_ambiguity, ambiguity_winner = self._resolve_ambiguity(full_term_map[term], entity_weights)
 
                 single_weight = 0
                 if term in entity_weights:
@@ -236,8 +263,7 @@ class TagsExtractor():
             if i > number:
                 break
 
-        self.tags = OrderedDict(sorted(tags.items(), key=lambda t: t[1], reverse=True))
-        return self.tags
+        return tags
 
     def to_json(self):
         return json.dumps(self.tags)
