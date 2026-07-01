@@ -9,7 +9,6 @@ excludePos = ["PUNCT", "PART"];
 mwEntityLabelWeight = {"PERSON": 5, "ORG": 5, "NORP": 3, "GPE": 1.5, "EVENT": 5, "PRODUCT": 5, "WORK_OF_ART": 5,
                        "DATE": 0}
 multipleOccuranceMultiplier = True
-multiWinsMode = True
 fullTermWeightBonusCoefficient = {"PERSON": 2}
 
 
@@ -89,14 +88,6 @@ class TextRank4Keyword():
 
         return g_norm
 
-    def get_keywords(self, number=10):
-        """Print top number keywords"""
-        node_weight = OrderedDict(sorted(self.node_weight.items(), key=lambda t: t[1], reverse=True))
-        for i, (key, value) in enumerate(node_weight.items()):
-            # print(key + ' - ' + str(value))
-            if i > number:
-                break
-
     def analyze(self, text,
                 labels=[],
                 candidate_pos=['NOUN', 'PROPN'],
@@ -157,7 +148,6 @@ class TagsExtractor():
 
         tr4w = TextRank4Keyword(self.nlp);
         tr4w.analyze(text, labels, candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-        # tr4w.get_keywords(20);
         return self.get_tags(tr4w.doc, tr4w.node_weight, num)
 
     def normalize_entity(self, ent):
@@ -232,11 +222,6 @@ class TagsExtractor():
 
                     extraWeight = tags[txt] if txt in tags else 0
                     multiWeight = (cnt[txt] + extraWeight) * weightBonus
-
-                    # if multiWinsMode or multiWeight > singleWeight:
-                    #     tags[txt] = tags.setdefault(txt, 0) + value;
-                    # else:
-                    #     tags[key] = tags.setdefault(key, 0) + value;
 
                     if singleWeight >= multiWeight:
                         tags[key] = tags.setdefault(key, 0) + (value * singleWeight)
